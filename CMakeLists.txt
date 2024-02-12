@@ -5,4 +5,7 @@ set(CMAKE_CXX_STANDARD 17)
 
 add_executable(cpp_stratego_gg main.cpp
         IO_Handler.h
-        IO_Handler.cpp)
+        IO_Handler.cpp
+        Enums/PlayerColor.h
+        Figures/Figure.h
+        Figures/Figure.cpp)
