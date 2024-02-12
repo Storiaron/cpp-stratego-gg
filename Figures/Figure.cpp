@@ -82,3 +82,10 @@ void Figure::initializeStats() {
         }
     }
 }
+
+bool Figure::isWithinMovementRange(int range) const {
+    if (range <= movement) {
+        return true;
+    }
+    return false;
+}

@@ -27,6 +27,7 @@ public:
     std::vector<AttackType> getAttackTypes() const;
     FigureStats getStats();
     bool isWithinAtkRange(int range) const;
+    bool isWithinMovementRange(int range) const;
 
 protected:
     FigureStats stats;

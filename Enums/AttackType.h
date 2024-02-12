@@ -7,10 +7,11 @@ enum AttackType {
     MELEE,
     RANGE,
     HEAL,
-    LIFESTEAL
+    LIFESTEAL,
+    NONE
 };
 
-static const char * AttackTypeStrings[] = { "Melee", "Range", "Heal", "Lifesteal" };
+static const char * AttackTypeStrings[] = { "Melee", "Range", "Heal", "Lifesteal", "None" };
 
 const char * GetAttackTypeText( int enumVal )
 {
