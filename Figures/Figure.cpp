@@ -45,10 +45,7 @@ int Figure::getDamage() const {
 }
 
 bool Figure::isWithinAtkRange(int range) const {
-    if (minAttackRange <= range && range <= maxAttackRange) {
-        return true;
-    }
-    return false;
+    return minAttackRange <= range && range <= maxAttackRange;
 }
 
 std::vector<AttackType> Figure::getAttackTypes() const {
@@ -84,8 +81,5 @@ void Figure::initializeStats() {
 }
 
 bool Figure::isWithinMovementRange(int range) const {
-    if (range <= movement) {
-        return true;
-    }
-    return false;
+    return range <= movement;
 }

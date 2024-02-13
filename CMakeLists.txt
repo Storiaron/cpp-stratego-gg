@@ -12,4 +12,6 @@ add_executable(cpp_stratego_gg main.cpp
         Figures/Soldiers/Peasant.h
         Figures/Soldiers/Peasant.cpp
         Figures/Soldiers/King.h
-        Figures/Soldiers/BabyDragon.h)
+        Figures/Soldiers/BabyDragon.h
+        Player/Player.h
+        Player/Player.cpp)
