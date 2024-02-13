@@ -7,5 +7,5 @@
 
 class Archer : public Figure {
 public:
-    explicit Archer(PlayerColor color) : Figure("Archer", 10, -5, 2, 2, 4, 30, {AttackType::RANGE}, AttackType::NONE, color){};
+    explicit Archer(PlayerColor color) : Figure(FigureName::ARCHER, 10, -5, 2, 2, 4, 30, {AttackType::RANGE}, AttackType::NONE, color){};
 };

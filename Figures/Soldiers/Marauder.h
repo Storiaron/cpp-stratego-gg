@@ -7,5 +7,5 @@
 
 class Marauder : public Figure {
 public:
-    explicit Marauder(PlayerColor color) : Figure("Marauder", 20, -7, 1, 1, 1, 20, {AttackType::MELEE}, AttackType::NONE, color){};
+    explicit Marauder(PlayerColor color) : Figure(FigureName::MARAUDER, 20, -7, 1, 1, 1, 20, {AttackType::MELEE}, AttackType::NONE, color){};
 };

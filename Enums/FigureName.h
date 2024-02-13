@@ -3,7 +3,7 @@
 //
 #pragma once
 
-enum AttackType {
+enum FigureName {
     KING,
     PEASANT,
     MARAUDER,

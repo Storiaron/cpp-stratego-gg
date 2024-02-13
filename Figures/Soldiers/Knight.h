@@ -7,7 +7,7 @@
 
 class Knight : public Figure {
 public:
-    explicit Knight(PlayerColor color) : Figure("Knight", 25, -10, 1, 1, 1, 50, {AttackType::MELEE}, AttackType::LIFESTEAL, color){};
+    explicit Knight(PlayerColor color) : Figure(FigureName::KNIGHT, 25, -10, 1, 1, 1, 50, {AttackType::MELEE}, AttackType::LIFESTEAL, color){};
 };
 
 

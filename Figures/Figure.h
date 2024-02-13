@@ -10,12 +10,14 @@
 #include "../Enums/AttackType.h"
 #include "../Enums/PlayerColor.h"
 #include "FigureStats.h"
+#include "../Enums/FigureName.h"
 
 
 class Figure
         : public std::enable_shared_from_this<Figure> {
 public:
-    Figure(const std::string& name, int currentHp, int damage, int movement,
+    Figure() = default;
+    Figure(FigureName name, int currentHp, int damage, int movement,
            int minAttackRange, int maxAttackRange, int price,
            std::vector<AttackType> attackTypes,
            AttackType resistance, PlayerColor color);
@@ -24,6 +26,7 @@ public:
     int getPrice() const;
     int getMovement() const;
     int getDamage() const;
+    FigureName getName() const;
     std::vector<AttackType> getAttackTypes() const;
     FigureStats getStats();
     bool isWithinAtkRange(int range) const;
@@ -31,16 +34,16 @@ public:
 
 protected:
     FigureStats stats;
-    std::string name;
-    int currentHp;
-    int damage;
-    int movement;
-    int minAttackRange;
-    int maxAttackRange;
-    int price;
-    std::vector<AttackType> attackTypes;
-    AttackType resistance;
-    PlayerColor color;
+    FigureName name{};
+    int currentHp{0};
+    int damage{0};
+    int movement{0};
+    int minAttackRange{0};
+    int maxAttackRange{0};
+    int price{0};
+    std::vector<AttackType> attackTypes{};
+    AttackType resistance{};
+    PlayerColor color{};
 
     void initializeStats();
     void updateCurrentHpStat();

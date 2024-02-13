@@ -7,7 +7,7 @@
 
 class BabyDragon : public Figure {
 public:
-    explicit BabyDragon(PlayerColor color) : Figure("BabyDragon", 50, -15, 1, 1, 3, 100, {AttackType::RANGE}, AttackType::NONE, color){};
+    explicit BabyDragon(PlayerColor color) : Figure(FigureName::BABY_DRAGON, 50, -15, 1, 1, 3, 100, {AttackType::RANGE}, AttackType::NONE, color){};
 };
 
 

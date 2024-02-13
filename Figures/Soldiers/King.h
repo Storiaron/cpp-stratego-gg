@@ -7,5 +7,5 @@
 
 class King : public Figure {
 public:
-    explicit King(PlayerColor color) : Figure("King", 100, 0, 1, 0, 0, 0, {AttackType::NONE}, AttackType::HEAL, color){};
+    explicit King(PlayerColor color) : Figure(FigureName::KING, 100, 0, 1, 0, 0, 0, {AttackType::NONE}, AttackType::HEAL, color){};
 };
