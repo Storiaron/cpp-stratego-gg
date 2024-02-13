@@ -5,6 +5,17 @@
 #pragma once
 
 
-class Player {
+#include "../Figures/Figure.h"
 
+class Player {
+public:
+    Player(PlayerColor color);
+    void spendGold(int amount);
+    bool canGoldBeSpent(int amount) const;
+    void addFigure(const Figure& figure);
+
+private:
+    std::vector<Figure> figures;
+    PlayerColor color;
+    int gold = 350;
 };
