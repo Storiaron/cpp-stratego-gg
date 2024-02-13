@@ -3,6 +3,16 @@ project(cpp_stratego_gg)
 
 set(CMAKE_CXX_STANDARD 17)
 
+find_package(SDL2 CONFIG REQUIRED)
+find_package(SDL2_image CONFIG REQUIRED)
+
 add_executable(cpp_stratego_gg main.cpp
         IO_Handler.h
         IO_Handler.cpp)
+
+target_link_libraries(cpp_stratego_gg
+        PRIVATE
+        $<TARGET_NAME_IF_EXISTS:SDL2::SDL2main>
+        $<IF:$<TARGET_EXISTS:SDL2::SDL2>,SDL2::SDL2,SDL2::SDL2-static>
+        $<IF:$<TARGET_EXISTS:SDL2_image::SDL2_image>,SDL2_image::SDL2_image,SDL2_image::SDL2_image-static>
+)
