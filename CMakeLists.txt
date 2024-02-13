@@ -8,7 +8,20 @@ find_package(SDL2_image CONFIG REQUIRED)
 
 add_executable(cpp_stratego_gg main.cpp
         IO_Handler.h
-        IO_Handler.cpp)
+        IO_Handler.cpp
+        Enums/PlayerColor.h
+        Figures/Figure.h
+        Figures/Figure.cpp
+        Figures/Soldiers/Peasant.h
+        Figures/Soldiers/Peasant.cpp
+        Figures/Soldiers/King.h
+        Figures/Soldiers/BabyDragon.h
+        Player/Player.h
+        Player/Player.cpp
+        Logic/Cell.h
+        Logic/GameLogic.h
+        Logic/GameLogic.cpp
+        Logic/Cell.cpp)
 
 target_link_libraries(cpp_stratego_gg
         PRIVATE
