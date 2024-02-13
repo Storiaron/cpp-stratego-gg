@@ -13,6 +13,7 @@ public:
     void spendGold(int amount);
     bool canGoldBeSpent(int amount) const;
     void addFigure(const Figure& figure);
+    PlayerColor getColor();
 
 private:
     std::vector<Figure> figures;

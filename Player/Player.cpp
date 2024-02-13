@@ -21,3 +21,7 @@ bool Player::canGoldBeSpent(int amount) const {
 void Player::addFigure(const Figure& figure) {
     figures.push_back(figure);
 }
+
+PlayerColor Player::getColor() {
+    return color;
+}
