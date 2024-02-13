@@ -6,12 +6,13 @@
 
 enum PlayerColor {
     BLUE,
-    RED
+    RED,
+    NO_COLOR
 };
 
-static const char * PlayerColorStrings[] = { "Blue", "Red" };
+static const char * PlayerColorStrings[] = { "Blue", "Red", "No Color" };
 
-const char * GetPlayerColorText( int enumVal )
+static const char * GetPlayerColorText( int enumVal )
 {
     return PlayerColorStrings[enumVal];
 }

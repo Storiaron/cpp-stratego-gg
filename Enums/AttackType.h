@@ -13,7 +13,7 @@ enum AttackType {
 
 static const char * AttackTypeStrings[] = { "Melee", "Range", "Heal", "Lifesteal", "None" };
 
-const char * GetAttackTypeText( int enumVal )
+static const char * GetAttackTypeText( int enumVal )
 {
     return AttackTypeStrings[enumVal];
 }
