@@ -59,5 +59,11 @@ private:
     void handleEvent();
     void handleClick(const SDL_MouseButtonEvent &click);
     void handleHover(SDL_MouseMotionEvent motion);
+    void togglePanels();
 
+    void handleClickInGamePhase();
+
+    void handleClickInBuyPhase();
+
+    void decideClickHandlePhase();
 };
