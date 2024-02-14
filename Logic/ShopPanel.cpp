@@ -50,82 +50,101 @@ void ShopPanel::initializeBuyableFigures() {
 void ShopPanel::buyFigure() {
     std::shared_ptr<Player> currentPlayer = this->game->getCurrentPlayer();
     PlayerColor currentPlayerColor = currentPlayer->getColor();
-    if (currentPlayer->canGoldBeSpent(selectedFigure->getPrice())
-        && game->getSelectedCell()->getFigureOnCell() == nullptr) {
+    if (selectedFigure != nullptr
+    && currentPlayer->canGoldBeSpent(selectedFigure->getPrice())
+    && game->getSelectedCell()->getFigureOnCell() == nullptr) {
         currentPlayer->spendGold(selectedFigure->getPrice());
 
-        switch (selectedFigure->getName()) {
-            case FigureName::KING: {
-                King figure(currentPlayerColor);
-                currentPlayer->addFigure(figure);
-                break;
-            }
-            case FigureName::PEASANT: {
-                Peasant figure(currentPlayerColor);
-                currentPlayer->addFigure(figure);
-                break;
-            }
-            case FigureName::MARAUDER: {
-                Marauder figure(currentPlayerColor);
-                currentPlayer->addFigure(figure);
-                break;
-            }
-            case FigureName::WALL: {
-                Wall figure(currentPlayerColor);
-                currentPlayer->addFigure(figure);
-                break;
-            }
-            case FigureName::ARTIFICER: {
-                Artificer figure(currentPlayerColor);
-                currentPlayer->addFigure(figure);
-                break;
-            }
-            case FigureName::ARCHER: {
-                Archer figure(currentPlayerColor);
-                currentPlayer->addFigure(figure);
-                break;
-            }
-            case FigureName::SORCERER: {
-                Sorcerer figure(currentPlayerColor);
-                currentPlayer->addFigure(figure);
-                break;
-            }
-            case FigureName::CAVALIER: {
-                Cavalier figure(currentPlayerColor);
-                currentPlayer->addFigure(figure);
-                break;
-            }
-            case FigureName::KNIGHT: {
-                Knight figure(currentPlayerColor);
-                currentPlayer->addFigure(figure);
-                break;
-            }
-            case FigureName::CLERIC: {
-                Cleric figure(currentPlayerColor);
-                currentPlayer->addFigure(figure);
-                break;
-            }
-            case FigureName::VAMPIRE: {
-                Vampire figure(currentPlayerColor);
-                currentPlayer->addFigure(figure);
-                break;
-            }
-            case FigureName::PALADIN: {
-                Paladin figure(currentPlayerColor);
-                currentPlayer->addFigure(figure);
-                break;
-            }
-            case FigureName::BABY_DRAGON: {
-                BabyDragon figure(currentPlayerColor);
-                currentPlayer->addFigure(figure);
-                break;
-            }
-            default: {
-                std::cerr << "An error has occurred.";
-                break;
-            }
-        }
+        createFigureForPlayer(currentPlayer, currentPlayerColor);
     } else {
         std::cerr << "Player doesn't have enough gold or cell is taken!";
     }
 }
+
+void ShopPanel::createFigureForPlayer(std::shared_ptr<Player> &currentPlayer, const PlayerColor &currentPlayerColor) {
+    switch (selectedFigure->getName()) {
+        case KING: {
+            King figure(currentPlayerColor);
+            AddFigureToPlayerInventoryAndPlaceOnCell(currentPlayer, figure);
+            break;
+        }
+        case PEASANT: {
+            Peasant figure(currentPlayerColor);
+            AddFigureToPlayerInventoryAndPlaceOnCell(currentPlayer, figure);
+            break;
+        }
+        case MARAUDER: {
+            Marauder figure(currentPlayerColor);
+            AddFigureToPlayerInventoryAndPlaceOnCell(currentPlayer, figure);
+            break;
+        }
+        case WALL: {
+            Wall figure(currentPlayerColor);
+            AddFigureToPlayerInventoryAndPlaceOnCell(currentPlayer, figure);
+            break;
+        }
+        case ARTIFICER: {
+            Artificer figure(currentPlayerColor);
+            AddFigureToPlayerInventoryAndPlaceOnCell(currentPlayer, figure);
+            break;
+        }
+        case ARCHER: {
+            Archer figure(currentPlayerColor);
+            AddFigureToPlayerInventoryAndPlaceOnCell(currentPlayer, figure);
+            break;
+        }
+        case SORCERER: {
+            Sorcerer figure(currentPlayerColor);
+            AddFigureToPlayerInventoryAndPlaceOnCell(currentPlayer, figure);
+            break;
+        }
+        case CAVALIER: {
+            Cavalier figure(currentPlayerColor);
+            AddFigureToPlayerInventoryAndPlaceOnCell(currentPlayer, figure);
+            break;
+        }
+        case KNIGHT: {
+            Knight figure(currentPlayerColor);
+            AddFigureToPlayerInventoryAndPlaceOnCell(currentPlayer, figure);
+            break;
+        }
+        case CLERIC: {
+            Cleric figure(currentPlayerColor);
+            AddFigureToPlayerInventoryAndPlaceOnCell(currentPlayer, figure);
+            break;
+        }
+        case VAMPIRE: {
+            Vampire figure(currentPlayerColor);
+            AddFigureToPlayerInventoryAndPlaceOnCell(currentPlayer, figure);
+            break;
+        }
+        case PALADIN: {
+            Paladin figure(currentPlayerColor);
+            AddFigureToPlayerInventoryAndPlaceOnCell(currentPlayer, figure);
+            break;
+        }
+        case BABY_DRAGON: {
+            BabyDragon figure(currentPlayerColor);
+            AddFigureToPlayerInventoryAndPlaceOnCell(currentPlayer, figure);
+            break;
+        }
+        default: {
+            std::cerr << "An error has occurred.";
+            break;
+        }
+    }
+}
+
+void ShopPanel::AddFigureToPlayerInventoryAndPlaceOnCell(std::shared_ptr<Player> &currentPlayer, const Figure &figure) {
+    currentPlayer->addFigure(figure);
+    game->getSelectedCell()->addFigureToCell(std::make_shared<Figure>(figure));
+}
+
+std::shared_ptr<Figure> ShopPanel::getSelectedFigure() {
+    return selectedFigure;
+}
+
+void ShopPanel::setSelectedFigure(std::shared_ptr<Figure> figure) {
+    selectedFigure = std::move(figure);
+}
+
