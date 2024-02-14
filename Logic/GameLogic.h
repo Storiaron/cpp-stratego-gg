@@ -18,6 +18,8 @@ public:
     void setTargetCell(std::shared_ptr<Cell> cell);
     void moveOrAttack();
     bool getCurrentlySelectedFigure();
+    std::shared_ptr<Player> getRedPlayer();
+    std::shared_ptr<Player> getBluePlayer();
     std::shared_ptr<Cell> getSelectedCell();
 
 private:

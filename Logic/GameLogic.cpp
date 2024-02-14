@@ -79,3 +79,12 @@ std::shared_ptr<Cell> GameLogic::getSelectedCell() {
 bool GameLogic::getCurrentlySelectedFigure() {
     return isAFigureCurrentlySelected;
 }
+
+std::shared_ptr<Player> GameLogic::getRedPlayer() {
+    return std::make_shared<Player>(redPlayer);
+}
+
+std::shared_ptr<Player> GameLogic::getBluePlayer() {
+    return std::make_shared<Player>(bluePlayer);
+}
+
