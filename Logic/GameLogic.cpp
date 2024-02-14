@@ -35,24 +35,24 @@ void GameLogic::setSelectedCell(std::shared_ptr<Cell> cell) {
 }
 
 void GameLogic::initializeBoard() {
-    std::vector<Cell> cells = {};
-
-    for (int x = 0; x < 10; x++) {
-        for (int y = 0; y < 10; y++) {
-            Cell cell(x, y, 20);
-            cells.push_back(cell);
-        }
-    }
-
-    for (int i = 0; i < cells.size(); i++) {
-        board.get()[i] = cells[i];
-        if (i < 30) {
-            redAvailableCells.get()[i] = cells[i];
-        }
-        if (i > 69) {
-            blueAvailableCells.get()[i-70] = cells[i];
-        }
-    }
+//    std::vector<Cell> cells = {};
+//
+//    for (int x = 0; x < 10; x++) {
+//        for (int y = 0; y < 10; y++) {
+//            Cell cell(x, y, 20);
+//            cells.push_back(cell);
+//        }
+//    }
+//
+//    for (int i = 0; i < cells.size(); i++) {
+//        board.get()[i] = cells[i];
+//        if (i < 30) {
+//            redAvailableCells.get()[i] = cells[i];
+//        }
+//        if (i > 69) {
+//            blueAvailableCells.get()[i-70] = cells[i];
+//        }
+//    }
 }
 
 void GameLogic::moveOrAttack() {
