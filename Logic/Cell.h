@@ -4,19 +4,21 @@
 
 #pragma once
 #include "../Figures/Figure.h"
-
+#include <SDL.h>
 
 class Cell {
 public:
-    Cell() = default;
-    Cell(int x, int y, int pixelSize);
-    ~Cell();
+    Cell(int index) :
+    cellIndex(index)
+    {};
+
+    bool isClicked{false};
+
     void removeFigureFromCell();
     void addFigureToCell(std::shared_ptr<Figure> figure);
     std::shared_ptr<Figure> getFigureOnCell();
 
 private:
     std::shared_ptr<Figure> figure = nullptr;
-    int x{0};
-    int y{0};
+    int cellIndex;
 };
