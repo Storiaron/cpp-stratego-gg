@@ -16,7 +16,7 @@ public:
     std::shared_ptr<Player> getCurrentPlayer();
     void setSelectedFigure(std::shared_ptr<Figure> figure);
     void setSelectedCell(std::shared_ptr<Cell> cell);
-    void moveOrAttack();
+    bool moveOrAttack();
     std::shared_ptr<Cell> getSelectedCell();
 
 private:

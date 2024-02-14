@@ -55,13 +55,16 @@ void GameLogic::initializeBoard() {
     }
 }
 
-void GameLogic::moveOrAttack() {
+bool GameLogic::moveOrAttack() {
     if (selectedFigure->getMovement() > 0 && selectedCell->getFigureOnCell() == nullptr) {
         previouslySelectedCell->removeFigureFromCell();
         selectedCell->addFigureToCell(selectedFigure);
+        return true;
     } else if (selectedCell->getFigureOnCell() != nullptr) {
         selectedFigure->attack(selectedCell->getFigureOnCell());
+        return true;
     }
+    return false;
 }
 
 std::shared_ptr<Cell> GameLogic::getSelectedCell() {
