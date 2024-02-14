@@ -70,6 +70,9 @@ void GameLogic::moveOrAttack() {
         targetCell->addFigureToCell(figureToMove);
     } else if (targetCell->getFigureOnCell() != nullptr) {
         figureToMove->attack(targetCell->getFigureOnCell());
+        if (targetCell->getFigureOnCell()->getIsDead()) {
+            targetCell->removeFigureFromCell();
+        }
     }
     isAFigureCurrentlySelected = false;
 }
