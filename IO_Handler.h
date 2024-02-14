@@ -12,6 +12,8 @@
 #include "Logic/GameLogic.h"
 #include "Logic/InfoPanel.h"
 #include "Logic/ShopPanel.h"
+#include "Figures/Soldiers/Marauder.h"
+#include "Figures/Soldiers/Peasant.h"
 
 
 class IO_Handler {
