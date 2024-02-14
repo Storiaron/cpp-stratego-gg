@@ -34,22 +34,21 @@ void IO_Handler::initLogic() {
 
 
 void IO_Handler::initUI() {
-    int boardWidth = 1010;
-    int boardHeight = 1010;
-    boardUI = std::make_shared<BoardUI>(renderer, boardWidth,boardHeight);
+    panelUI = std::make_shared<PanelLayerUI>(renderer, layerWidth, windowHeight,0,0);
+    boardUI = std::make_shared<BoardUI>(renderer, boardWidth,windowHeight, layerWidth,0);
 
     int cellWidth = 90;
     int cellHeight = 90;
     int cellBorderSize = 10;
-    int x = cellBorderSize;
+    int x = cellBorderSize + layerWidth;
     int y = cellBorderSize;
 
     for(int i = 0; i < numberOfCells; i++){
         boardCellsUI.push_back(std::make_shared<CellUI>(renderer,cells[i], cellWidth, cellHeight, x, y));
 
-        if( x + cellWidth + cellBorderSize >= boardWidth){
+        if( x + cellWidth + cellBorderSize >= boardWidth + layerWidth){
             y = y + cellHeight + cellBorderSize;
-            x = cellBorderSize;
+            x = cellBorderSize + layerWidth;
         } else {
             x = x + cellWidth + cellBorderSize;
         }
@@ -104,7 +103,7 @@ void IO_Handler::handleHover(SDL_MouseMotionEvent motion) {
 
     int index = 0;
 
-    for (auto &cell : boardCellsUI) {
+    for (std::shared_ptr<CellUI> &cell : boardCellsUI) {
         if((cell->cellRect.x < mouseX) && (cell->cellRect.w + cell->cellRect.x > mouseX) &&
                 (cell->cellRect.y < mouseY) && (cell->cellRect.h + cell->cellRect.y > mouseY)){
             std::cout << std::to_string(index) << std::endl;
@@ -117,6 +116,7 @@ void IO_Handler::handleHover(SDL_MouseMotionEvent motion) {
 void IO_Handler::display() {
     SDL_RenderClear(renderer);
 
+    panelUI->print(renderer);
     boardUI->print(renderer);
 
     for(const std::shared_ptr<CellUI>& cell : boardCellsUI){

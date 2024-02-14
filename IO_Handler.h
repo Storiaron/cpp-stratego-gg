@@ -9,6 +9,7 @@
 #include "UI/BoardUI.h"
 #include "UI/CellUI.h"
 #include "Logic/Cell.h"
+#include "UI/PanelLayerUI.h"
 
 
 class IO_Handler {
@@ -31,13 +32,16 @@ private:
     SDL_Renderer* renderer{nullptr};
     SDL_Event event{};
 
+    const static int layerWidth{250};
+    const static int boardWidth{1010};
     const static int windowHeight{1010};
-    const static int windowWidth{1010};
+    const static int windowWidth{layerWidth + boardWidth};
 
     int currentCellIndex{-1};
     std::vector<std::shared_ptr<Cell>> cells{};
     std::vector<std::shared_ptr<CellUI>> boardCellsUI;
     std::shared_ptr<BoardUI> boardUI{nullptr};
+    std::shared_ptr<PanelLayerUI> panelUI{nullptr};
 
     bool isRunning{true};
     int numberOfCells = 100;

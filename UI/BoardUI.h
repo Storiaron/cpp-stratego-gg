@@ -4,11 +4,11 @@
 
 class BoardUI : public TextureCreator {
 public:
-    BoardUI(SDL_Renderer* renderer, int width, int height) :
+    BoardUI(SDL_Renderer* renderer, int width, int height, int x, int y) :
     TextureCreator(renderer, width, height, SDL_Color{255,0,0,255})
     {
-        boardRect.x = 0;
-        boardRect.y = 0;
+        boardRect.x = x;
+        boardRect.y = y;
     };
 
     void print(SDL_Renderer* renderer) override;
