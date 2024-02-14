@@ -9,14 +9,18 @@
 #include "UI/BoardUI.h"
 #include "UI/CellUI.h"
 #include "Logic/Cell.h"
+#include "Logic/GameLogic.h"
+#include "Logic/InfoPanel.h"
+#include "Logic/ShopPanel.h"
 
 
 class IO_Handler {
 public:
     IO_Handler(){
         initSDL();
-        initLogic();
+        initCells();
         initUI();
+        initLogic();
     }
 
     ~IO_Handler(){
@@ -31,6 +35,11 @@ private:
     SDL_Renderer* renderer{nullptr};
     SDL_Event event{};
 
+    std::shared_ptr<GameLogic> gameLogic;
+    std::shared_ptr<InfoPanel> infoPanel;
+    std::shared_ptr<ShopPanel> shopPanel;
+    std::shared_ptr<InfoPanel> currentPanel;
+
     const static int windowHeight{1010};
     const static int windowWidth{1010};
 
@@ -43,6 +52,7 @@ private:
     int numberOfCells = 100;
 
     void initSDL();
+    void initCells();
     void initLogic();
     void initUI();
     void display();
