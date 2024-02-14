@@ -18,4 +18,6 @@ private:
     void initializeBuyableFigures();
     std::shared_ptr<Figure> selectedFigure;
     std::shared_ptr<Figure> buyableFigures{new Figure[13]};
+
+    void addFigureToPlayer(std::shared_ptr<Player> &currentPlayer, const PlayerColor &currentPlayerColor) const;
 };
