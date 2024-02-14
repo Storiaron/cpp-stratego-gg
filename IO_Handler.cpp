@@ -26,7 +26,7 @@ void IO_Handler::initSDL() {
 }
 
 
-void IO_Handler::initLogic() {
+void IO_Handler::initCells() {
     for(int i = 0; i < numberOfCells; i++){
         cells.push_back(std::make_shared<Cell>(i));
     }
@@ -90,6 +90,11 @@ void IO_Handler::handleClick(const SDL_MouseButtonEvent &click) {
             }
             currentCellIndex = index;
             cells[currentCellIndex]->isClicked = true;
+            if (gameLogic->getCurrentlySelectedFigure()) {
+                gameLogic->setTargetCell(cells[currentCellIndex]);
+            } else {
+                gameLogic->setFigureToMove(cells[currentCellIndex]);
+            }
             break;
         }
         index++;
@@ -124,6 +129,13 @@ void IO_Handler::display() {
     }
 
     SDL_RenderPresent(renderer);
+}
+
+void IO_Handler::initLogic() {
+    gameLogic = std::make_shared<GameLogic>(GameLogic());
+    infoPanel = std::make_shared<InfoPanel>(InfoPanel(gameLogic));
+    shopPanel = std::make_shared<ShopPanel>(ShopPanel(gameLogic));
+    currentPanel = shopPanel;
 }
 
 
