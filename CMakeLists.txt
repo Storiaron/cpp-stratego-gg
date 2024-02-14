@@ -22,6 +22,10 @@ add_executable(cpp_stratego_gg main.cpp
         Logic/GameLogic.h
         Logic/GameLogic.cpp
         Logic/Cell.cpp
+        Logic/InfoPanel.h
+        Logic/InfoPanel.cpp
+        Logic/ShopPanel.h
+        Logic/ShopPanel.cpp
         UI/TextureCreator.cpp
         UI/TextureCreator.h
         UI/BoardUI.cpp

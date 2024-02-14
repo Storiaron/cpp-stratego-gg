@@ -7,5 +7,5 @@
 
 class Cavalier : public Figure {
 public:
-    explicit Cavalier(PlayerColor color) : Figure("Cavalier", 20, -15, 3, 1, 1, 40, {AttackType::MELEE}, AttackType::NONE, color){};
+    explicit Cavalier(PlayerColor color) : Figure(FigureName::CAVALIER, 20, -15, 3, 1, 1, 40, {AttackType::MELEE}, AttackType::NONE, color){};
 };

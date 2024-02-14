@@ -63,3 +63,7 @@ void GameLogic::moveOrAttack() {
         selectedFigure->attack(selectedCell->getFigureOnCell());
     }
 }
+
+std::shared_ptr<Cell> GameLogic::getSelectedCell() {
+    return selectedCell;
+}
