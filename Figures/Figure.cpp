@@ -27,7 +27,7 @@ void Figure::attack(const std::shared_ptr<Figure>& target) {
 }
 
 void Figure::defend(const std::shared_ptr<Figure>& attacker) {
-    if (std::find(attacker->getAttackTypes().begin(), attacker->getAttackTypes().end(), resistance) == attacker->getAttackTypes().end()) {
+    if (isNotResistant(attacker)) {
         this->currentHp += attacker->getDamage();
     }
 }
