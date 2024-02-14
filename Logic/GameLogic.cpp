@@ -11,15 +11,17 @@ GameLogic::~GameLogic() {
 }
 
 GameLogic::GameLogic() {
-    currentPlayer = std::make_shared<Player>(redPlayer);
+    redPlayer = std::make_shared<Player>(Player(PlayerColor::RED));
+    bluePlayer = std::make_shared<Player>(Player(PlayerColor::BLUE));
+    currentPlayer = redPlayer;
     initializeBoard();
 }
 
 void GameLogic::toggleCurrentPlayer() {
     if (currentPlayer->getColor() == PlayerColor::BLUE) {
-        currentPlayer = std::make_shared<Player>(redPlayer);
+        currentPlayer = redPlayer;
     } else {
-        currentPlayer = std::make_shared<Player>(bluePlayer);
+        currentPlayer = bluePlayer;
     }
 }
 
@@ -81,10 +83,10 @@ bool GameLogic::getCurrentlySelectedFigure() {
 }
 
 std::shared_ptr<Player> GameLogic::getRedPlayer() {
-    return std::make_shared<Player>(redPlayer);
+    return redPlayer;
 }
 
 std::shared_ptr<Player> GameLogic::getBluePlayer() {
-    return std::make_shared<Player>(bluePlayer);
+    return bluePlayer;
 }
 
