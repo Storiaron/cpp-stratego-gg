@@ -14,16 +14,16 @@ public:
     ~GameLogic();
     void toggleCurrentPlayer();
     std::shared_ptr<Player> getCurrentPlayer();
-    void setSelectedFigure(std::shared_ptr<Figure> figure);
-    void setSelectedCell(std::shared_ptr<Cell> cell);
-    void moveOrAttack();
+    void setFigureToMove(std::shared_ptr<Figure> figure, std::shared_ptr<Cell> cell);
+    void setTargetCell(std::shared_ptr<Cell> cell);
+    bool moveOrAttack();
     std::shared_ptr<Cell> getSelectedCell();
 
 private:
     void initializeBoard();
-    std::shared_ptr<Cell> selectedCell = nullptr;
-    std::shared_ptr<Figure> selectedFigure = nullptr;
-    std::shared_ptr<Cell> previouslySelectedCell = nullptr;
+    std::shared_ptr<Cell> targetCell = nullptr;
+    std::shared_ptr<Figure> selectedFigureToMove = nullptr;
+    std::shared_ptr<Cell> selectedCellWithFigureToMove = nullptr;
     Player redPlayer{(PlayerColor::RED)};
     Player bluePlayer{(PlayerColor::BLUE)};
     std::shared_ptr<Player> currentPlayer;

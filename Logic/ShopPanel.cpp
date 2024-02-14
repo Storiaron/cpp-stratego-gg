@@ -53,79 +53,82 @@ void ShopPanel::buyFigure() {
     if (currentPlayer->canGoldBeSpent(selectedFigure->getPrice())
         && game->getSelectedCell()->getFigureOnCell() == nullptr) {
         currentPlayer->spendGold(selectedFigure->getPrice());
-
-        switch (selectedFigure->getName()) {
-            case FigureName::KING: {
-                King figure(currentPlayerColor);
-                currentPlayer->addFigure(figure);
-                break;
-            }
-            case FigureName::PEASANT: {
-                Peasant figure(currentPlayerColor);
-                currentPlayer->addFigure(figure);
-                break;
-            }
-            case FigureName::MARAUDER: {
-                Marauder figure(currentPlayerColor);
-                currentPlayer->addFigure(figure);
-                break;
-            }
-            case FigureName::WALL: {
-                Wall figure(currentPlayerColor);
-                currentPlayer->addFigure(figure);
-                break;
-            }
-            case FigureName::ARTIFICER: {
-                Artificer figure(currentPlayerColor);
-                currentPlayer->addFigure(figure);
-                break;
-            }
-            case FigureName::ARCHER: {
-                Archer figure(currentPlayerColor);
-                currentPlayer->addFigure(figure);
-                break;
-            }
-            case FigureName::SORCERER: {
-                Sorcerer figure(currentPlayerColor);
-                currentPlayer->addFigure(figure);
-                break;
-            }
-            case FigureName::CAVALIER: {
-                Cavalier figure(currentPlayerColor);
-                currentPlayer->addFigure(figure);
-                break;
-            }
-            case FigureName::KNIGHT: {
-                Knight figure(currentPlayerColor);
-                currentPlayer->addFigure(figure);
-                break;
-            }
-            case FigureName::CLERIC: {
-                Cleric figure(currentPlayerColor);
-                currentPlayer->addFigure(figure);
-                break;
-            }
-            case FigureName::VAMPIRE: {
-                Vampire figure(currentPlayerColor);
-                currentPlayer->addFigure(figure);
-                break;
-            }
-            case FigureName::PALADIN: {
-                Paladin figure(currentPlayerColor);
-                currentPlayer->addFigure(figure);
-                break;
-            }
-            case FigureName::BABY_DRAGON: {
-                BabyDragon figure(currentPlayerColor);
-                currentPlayer->addFigure(figure);
-                break;
-            }
-            default: {
-                std::cerr << "An error has occurred.";
-                break;
-            }
-        }
+        addFigureToPlayer(currentPlayer, currentPlayerColor);
     } else {
         std::cerr << "Player doesn't have enough gold or cell is taken!";
+    }
+}
+
+void ShopPanel::addFigureToPlayer(std::shared_ptr<Player> &currentPlayer, const PlayerColor &currentPlayerColor) const {
+    switch (selectedFigure->getName()) {
+        case KING: {
+            King figure(currentPlayerColor);
+            currentPlayer->addFigure(figure);
+            break;
+        }
+        case PEASANT: {
+            Peasant figure(currentPlayerColor);
+            currentPlayer->addFigure(figure);
+            break;
+        }
+        case MARAUDER: {
+            Marauder figure(currentPlayerColor);
+            currentPlayer->addFigure(figure);
+            break;
+        }
+        case WALL: {
+            Wall figure(currentPlayerColor);
+            currentPlayer->addFigure(figure);
+            break;
+        }
+        case ARTIFICER: {
+            Artificer figure(currentPlayerColor);
+            currentPlayer->addFigure(figure);
+            break;
+        }
+        case ARCHER: {
+            Archer figure(currentPlayerColor);
+            currentPlayer->addFigure(figure);
+            break;
+        }
+        case SORCERER: {
+            Sorcerer figure(currentPlayerColor);
+            currentPlayer->addFigure(figure);
+            break;
+        }
+        case CAVALIER: {
+            Cavalier figure(currentPlayerColor);
+            currentPlayer->addFigure(figure);
+            break;
+        }
+        case KNIGHT: {
+            Knight figure(currentPlayerColor);
+            currentPlayer->addFigure(figure);
+            break;
+        }
+        case CLERIC: {
+            Cleric figure(currentPlayerColor);
+            currentPlayer->addFigure(figure);
+            break;
+        }
+        case VAMPIRE: {
+            Vampire figure(currentPlayerColor);
+            currentPlayer->addFigure(figure);
+            break;
+        }
+        case PALADIN: {
+            Paladin figure(currentPlayerColor);
+            currentPlayer->addFigure(figure);
+            break;
+        }
+        case BABY_DRAGON: {
+            BabyDragon figure(currentPlayerColor);
+            currentPlayer->addFigure(figure);
+            break;
+        }
+        default: {
+            std::cerr << "An error has occurred.";
+            break;
+        }
     }
 }
