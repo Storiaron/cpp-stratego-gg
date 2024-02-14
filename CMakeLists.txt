@@ -21,7 +21,15 @@ add_executable(cpp_stratego_gg main.cpp
         Logic/Cell.h
         Logic/GameLogic.h
         Logic/GameLogic.cpp
-        Logic/Cell.cpp)
+        Logic/Cell.cpp
+        UI/TextureCreator.cpp
+        UI/TextureCreator.h
+        UI/BoardUI.cpp
+        UI/BoardUI.h
+        UI/CellUI.cpp
+        UI/CellUI.h
+        UI/SelectedCellUI.cpp
+        UI/SelectedCellUI.h)
 
 target_link_libraries(cpp_stratego_gg
         PRIVATE
