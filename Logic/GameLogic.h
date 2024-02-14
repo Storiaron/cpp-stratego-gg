@@ -17,6 +17,7 @@ public:
     void setSelectedFigure(std::shared_ptr<Figure> figure);
     void setSelectedCell(std::shared_ptr<Cell> cell);
     void moveOrAttack();
+    std::shared_ptr<Cell> getSelectedCell();
 
 private:
     void initializeBoard();

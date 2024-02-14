@@ -6,7 +6,7 @@
 
 #include <utility>
 
-Figure::Figure(const std::string& name, int currentHp, int damage, int movement, int minAttackRange, int maxAttackRange,
+Figure::Figure(FigureName name, int currentHp, int damage, int movement, int minAttackRange, int maxAttackRange,
                int price, std::vector<AttackType> attackTypes, AttackType resistance, PlayerColor color) {
     this->name = name;
     this->currentHp = currentHp;
@@ -62,7 +62,7 @@ void Figure::updateCurrentHpStat() {
 }
 
 void Figure::initializeStats() {
-    stats.name = name;
+    stats.name = GetFigureNameText(name);
     stats.currentHp = std::to_string(currentHp);
     stats.damage = std::to_string(damage);
     stats.resistance = GetAttackTypeText(resistance);
@@ -83,3 +83,8 @@ void Figure::initializeStats() {
 bool Figure::isWithinMovementRange(int range) const {
     return range <= movement;
 }
+
+FigureName Figure::getName() const {
+    return name;
+}
+

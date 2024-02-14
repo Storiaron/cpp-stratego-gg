@@ -7,5 +7,5 @@
 
 class Sorcerer : public Figure {
 public:
-    explicit Sorcerer(PlayerColor color) : Figure("Sorcerer", 5, -10, 1, 1, 3, 30, {AttackType::RANGE}, AttackType::NONE, color){};
+    explicit Sorcerer(PlayerColor color) : Figure(FigureName::SORCERER, 5, -10, 1, 1, 3, 30, {AttackType::RANGE}, AttackType::NONE, color){};
 };
