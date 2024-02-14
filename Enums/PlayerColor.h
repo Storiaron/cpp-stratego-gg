@@ -11,7 +11,7 @@ enum PlayerColor {
 
 static const char * PlayerColorStrings[] = { "Blue", "Red" };
 
-const char * GetPlayerColorText( int enumVal )
+static const char * GetPlayerColorText( int enumVal )
 {
     return PlayerColorStrings[enumVal];
 }
