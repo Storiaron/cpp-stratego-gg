@@ -31,6 +31,7 @@ public:
     FigureStats getStats();
     bool isWithinAtkRange(int range) const;
     bool isWithinMovementRange(int range) const;
+    bool getIsDead();
 
 protected:
     FigureStats stats;
@@ -44,6 +45,8 @@ protected:
     std::vector<AttackType> attackTypes{};
     AttackType resistance{};
     PlayerColor color{};
+
+    bool isDead{false};
 
     void initializeStats();
     void updateCurrentHpStat();

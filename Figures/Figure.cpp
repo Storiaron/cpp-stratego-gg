@@ -27,8 +27,19 @@ void Figure::attack(const std::shared_ptr<Figure>& target) {
 }
 
 void Figure::defend(const std::shared_ptr<Figure>& attacker) {
-    if (std::find(attacker->getAttackTypes().begin(), attacker->getAttackTypes().end(), resistance) == attacker->getAttackTypes().end()) {
+    bool canBeBlocked = false;
+
+    for (AttackType attackType : attacker->getAttackTypes()) {
+        if (attackType == resistance) {
+            canBeBlocked = true;
+        }
+    }
+
+    if (!canBeBlocked) {
         this->currentHp += attacker->getDamage();
+        if (currentHp <= 0) {
+            isDead = true;
+        }
     }
 }
 
@@ -86,5 +97,9 @@ bool Figure::isWithinMovementRange(int range) const {
 
 FigureName Figure::getName() const {
     return name;
+}
+
+bool Figure::getIsDead() {
+    return isDead;
 }
 
