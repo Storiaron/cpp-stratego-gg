@@ -26,12 +26,13 @@ std::shared_ptr<Player> GameLogic::getCurrentPlayer() {
     return currentPlayer;
 }
 
-void GameLogic::setSelectedFigure(std::shared_ptr<Figure> figure) {
-    selectedFigure = std::move(figure);
+void GameLogic::setFigureToMove(std::shared_ptr<Figure> figure, std::shared_ptr<Cell> cell) {
+    selectedFigureToMove = std::move(figure);
+    selectedCellWithFigureToMove = std::move(cell);
 }
 
-void GameLogic::setSelectedCell(std::shared_ptr<Cell> cell) {
-    selectedCell = std::move(cell);
+void GameLogic::setTargetCell(std::shared_ptr<Cell> cell) {
+    targetCell = std::move(cell);
 }
 
 void GameLogic::initializeBoard() {
@@ -56,17 +57,17 @@ void GameLogic::initializeBoard() {
 }
 
 bool GameLogic::moveOrAttack() {
-    if (selectedFigure->getMovement() > 0 && selectedCell->getFigureOnCell() == nullptr) {
-        previouslySelectedCell->removeFigureFromCell();
-        selectedCell->addFigureToCell(selectedFigure);
+    if (selectedFigureToMove->getMovement() > 0 && targetCell->getFigureOnCell() == nullptr) {
+        selectedCellWithFigureToMove->removeFigureFromCell();
+        targetCell->addFigureToCell(selectedFigureToMove);
         return true;
-    } else if (selectedCell->getFigureOnCell() != nullptr) {
-        selectedFigure->attack(selectedCell->getFigureOnCell());
+    } else if (targetCell->getFigureOnCell() != nullptr) {
+        selectedFigureToMove->attack(targetCell->getFigureOnCell());
         return true;
     }
     return false;
 }
 
 std::shared_ptr<Cell> GameLogic::getSelectedCell() {
-    return selectedCell;
+    return targetCell;
 }
