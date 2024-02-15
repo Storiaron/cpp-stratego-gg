@@ -17,6 +17,8 @@
 #include "Figures/Soldiers/Marauder.h"
 #include "Figures/Soldiers/Peasant.h"
 #include "UI/PanelUI/PanelUI.h"
+#include "UI/BluePlayerTexture.h"
+#include "UI/RedPlayerTexture.h"
 
 
 class IO_Handler {
@@ -58,6 +60,9 @@ private:
     std::shared_ptr<BoardUI> boardUI{nullptr};
     std::shared_ptr<PanelLayerUI> panelUI{nullptr};
     std::shared_ptr<ButtonUI> shopButton{nullptr};
+
+    std::vector<std::shared_ptr<BluePlayerTexture>> bluePlayerFigures;
+    std::vector<std::shared_ptr<RedPlayerTexture>> redPlayerFigures;
 
     bool isRunning{true};
     int numberOfCells = 100;

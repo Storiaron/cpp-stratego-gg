@@ -54,7 +54,11 @@ add_executable(cpp_stratego_gg main.cpp
         UI/PanelUI/PanelUI.cpp
         UI/PanelUI/PanelUI.h
         UI/GameText.cpp
-        UI/GameText.h)
+        UI/GameText.h
+        UI/BluePlayerTexture.cpp
+        UI/BluePlayerTexture.h
+        UI/RedPlayerTexture.cpp
+        UI/RedPlayerTexture.h)
 
 target_link_libraries(cpp_stratego_gg
         PRIVATE
