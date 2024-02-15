@@ -35,7 +35,13 @@ add_executable(cpp_stratego_gg main.cpp
         UI/SelectedCellUI.cpp
         UI/SelectedCellUI.h
         UI/PanelLayerUI.cpp
-        UI/PanelLayerUI.h)
+        UI/PanelLayerUI.h
+        UI/ButtonUI.cpp
+        UI/ButtonUI.h
+        UI/ButtonHoveredUI.cpp
+        UI/ButtonHoveredUI.h
+        UI/ButtonClickUI.cpp
+        UI/ButtonClickUI.h)
 
 target_link_libraries(cpp_stratego_gg
         PRIVATE
