@@ -26,13 +26,15 @@ public:
     int getPrice() const;
     int getMovement() const;
     int getDamage() const;
+    PlayerColor getPlayerColor() { return color;}
+    const AttackType getResistance() { return resistance;}
     FigureName getName() const;
     std::vector<AttackType> getAttackTypes() const;
     FigureStats getStats();
     bool isWithinAtkRange(int range) const;
     bool isWithinMovementRange(int range) const;
     bool getIsDead();
-
+    bool isNotResistant(const std::shared_ptr<Figure> attacker) { return (std::find(attacker->getAttackTypes().begin(), attacker->getAttackTypes().end(), resistance) == attacker->getAttackTypes().end());}
 protected:
     FigureStats stats;
     FigureName name{};
@@ -45,9 +47,7 @@ protected:
     std::vector<AttackType> attackTypes{};
     AttackType resistance{};
     PlayerColor color{};
-
     bool isDead{false};
-
     void initializeStats();
     void updateCurrentHpStat();
 };
