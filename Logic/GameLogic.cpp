@@ -89,12 +89,10 @@ int GameLogic::calculateCellDistance() {
   return distance;
 }
 void GameLogic::move() {
-  std::cout << "move called";
   targetCell->addFigureToCell(figureToMove);
   cellWithFigureToMove->removeFigureFromCell();
 }
 void GameLogic::attack() {
-  std::cout << "attack called";
   figureToMove->attack(targetCell->getFigureOnCell());
   if (targetCell->getFigureOnCell()->getIsDead()) {
     targetCell->removeFigureFromCell();
