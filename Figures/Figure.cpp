@@ -27,15 +27,7 @@ void Figure::attack(const std::shared_ptr<Figure>& target) {
 }
 
 void Figure::defend(const std::shared_ptr<Figure>& attacker) {
-    bool canBeBlocked = false;
-
-    for (AttackType attackType : attacker->getAttackTypes()) {
-        if (attackType == resistance) {
-            canBeBlocked = true;
-        }
-    }
-
-    if (!canBeBlocked) {
+    if (isNotResistant(attacker)) {
         this->currentHp += attacker->getDamage();
         if (currentHp <= 0) {
             isDead = true;

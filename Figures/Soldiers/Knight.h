@@ -8,6 +8,7 @@
 class Knight : public Figure {
 public:
     explicit Knight(PlayerColor color) : Figure(FigureName::KNIGHT, 25, -10, 1, 1, 1, 50, {AttackType::MELEE}, AttackType::LIFESTEAL, color){};
+    void defend(const std::shared_ptr<Figure> &attacker) override;
 };
 
 
