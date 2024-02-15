@@ -9,11 +9,14 @@
 #include "UI/BoardUI.h"
 #include "UI/CellUI.h"
 #include "Logic/Cell.h"
+#include "UI/PanelLayerUI.h"
+#include "UI/ButtonUI.h"
 #include "Logic/GameLogic.h"
 #include "Logic/InfoPanel.h"
 #include "Logic/ShopPanel.h"
 #include "Figures/Soldiers/Marauder.h"
 #include "Figures/Soldiers/Peasant.h"
+#include "UI/PanelUI/PanelUI.h"
 
 
 class IO_Handler {
@@ -21,8 +24,8 @@ public:
     IO_Handler(){
         initSDL();
         initCells();
-        initUI();
         initLogic();
+        initUI();
     }
 
     ~IO_Handler(){
@@ -42,13 +45,19 @@ private:
     std::shared_ptr<ShopPanel> shopPanel;
     std::shared_ptr<InfoPanel> currentPanel;
 
+    std::shared_ptr<PanelUI> infoPanelUI{nullptr};
+
+    const static int layerWidth{250};
+    const static int boardWidth{1010};
     const static int windowHeight{1010};
-    const static int windowWidth{1010};
+    const static int windowWidth{layerWidth + boardWidth};
 
     int currentCellIndex{-1};
     std::vector<std::shared_ptr<Cell>> cells{};
     std::vector<std::shared_ptr<CellUI>> boardCellsUI;
     std::shared_ptr<BoardUI> boardUI{nullptr};
+    std::shared_ptr<PanelLayerUI> panelUI{nullptr};
+    std::shared_ptr<ButtonUI> shopButton{nullptr};
 
     bool isRunning{true};
     int numberOfCells = 100;

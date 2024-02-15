@@ -9,7 +9,9 @@ InfoPanel::InfoPanel(std::shared_ptr<GameLogic> gameLogic) {
 }
 
 void InfoPanel::setCurrentFigureInfo(const std::shared_ptr<Figure>& figure) {
-    this->currentFigureInfo = figure->getStats();
+    if (figure != nullptr) {
+        this->currentFigureInfo = figure->getStats();
+    }
 }
 
 std::shared_ptr<FigureStats> InfoPanel::getCurrentFigureInfo() {

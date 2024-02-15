@@ -62,7 +62,9 @@ FigureStats Figure::getStats() {
 }
 
 void Figure::updateCurrentHpStat() {
-    stats.currentHp = std::to_string(currentHp);
+    if (currentHp > 0) {
+        stats.currentHp = std::to_string(currentHp);
+    }
 }
 
 void Figure::initializeStats() {
