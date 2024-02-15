@@ -149,12 +149,14 @@ void IO_Handler::handleHover(SDL_MouseMotionEvent motion) {
         if((cell->cellRect.x < mouseX) && (cell->cellRect.w + cell->cellRect.x > mouseX) &&
                 (cell->cellRect.y < mouseY) && (cell->cellRect.h + cell->cellRect.y > mouseY)){
             cells[index]->isHovered = true;
+            infoPanel->setCurrentFigureInfo(cells[index]->getFigureOnCell());
             if (cells[index]->getFigureOnCell() != nullptr) {
-                infoPanel->setCurrentFigureInfo(cells[index]->getFigureOnCell());
-
                 //Write the figure's name in the console
+                infoPanelUI = std::make_shared<PanelUI>(renderer, infoPanel);
                 std::cout << infoPanel->getCurrentFigureInfo()->name << std::endl;
                 std::cout << infoPanel->getCurrentFigureInfo()->currentHp << std::endl;
+            } else {
+                infoPanelUI = nullptr;
             }
         } else {
             if(cells[index]->isHovered){
@@ -180,6 +182,10 @@ void IO_Handler::display() {
     panelUI->print(renderer);
     boardUI->print(renderer);
     shopButton->print(renderer);
+
+    if(infoPanelUI){
+        infoPanelUI->print(renderer);
+    }
 
     for(const std::shared_ptr<CellUI>& cell : boardCellsUI){
         cell->print(renderer);

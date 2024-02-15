@@ -16,6 +16,7 @@
 #include "Logic/ShopPanel.h"
 #include "Figures/Soldiers/Marauder.h"
 #include "Figures/Soldiers/Peasant.h"
+#include "UI/PanelUI/PanelUI.h"
 
 
 class IO_Handler {
@@ -23,8 +24,8 @@ public:
     IO_Handler(){
         initSDL();
         initCells();
-        initUI();
         initLogic();
+        initUI();
     }
 
     ~IO_Handler(){
@@ -43,6 +44,8 @@ private:
     std::shared_ptr<InfoPanel> infoPanel;
     std::shared_ptr<ShopPanel> shopPanel;
     std::shared_ptr<InfoPanel> currentPanel;
+
+    std::shared_ptr<PanelUI> infoPanelUI{nullptr};
 
     const static int layerWidth{250};
     const static int boardWidth{1010};
