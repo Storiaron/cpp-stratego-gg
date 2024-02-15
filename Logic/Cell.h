@@ -12,7 +12,8 @@ public:
     cellIndex(index)
     {};
 
-    bool isClicked{false};
+    bool isSelected{false};
+    bool isHovered{false};
 
     void removeFigureFromCell();
     void addFigureToCell(std::shared_ptr<Figure> figure);
