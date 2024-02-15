@@ -97,3 +97,24 @@ std::shared_ptr<Player> GameLogic::getRedPlayer() {
 std::shared_ptr<Player> GameLogic::getBluePlayer() {
     return bluePlayer;
 }
+
+int GameLogic::checkIfAPlayerHasWon() {
+    if (redPlayer->isKingDefeatedOrLastFigure()) {
+        return redPlayerWin;
+    } else if (bluePlayer->isKingDefeatedOrLastFigure()) {
+        return bluePlayerWin;
+    }
+    return noPlayerWin;
+}
+
+std::string GameLogic::getPlayerWinMessage() {
+    std::string winMessage = "";
+    if (checkIfAPlayerHasWon() == noPlayerWin) {
+        return winMessage;
+    } else if (checkIfAPlayerHasWon() == redPlayerWin) {
+        winMessage+= GetPlayerColorText(RED);
+    } else if (checkIfAPlayerHasWon() == bluePlayerWin) {
+        winMessage+= GetPlayerColorText(BLUE);
+    }
+    return winMessage;
+}

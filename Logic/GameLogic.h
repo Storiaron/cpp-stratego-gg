@@ -21,9 +21,14 @@ public:
     std::shared_ptr<Player> getRedPlayer();
     std::shared_ptr<Player> getBluePlayer();
     std::shared_ptr<Cell> getSelectedCell();
+    int checkIfAPlayerHasWon();
+    std::string getPlayerWinMessage();
 
 private:
     void initializeBoard();
+    int bluePlayerWin{2};
+    int redPlayerWin{1};
+    int noPlayerWin{0};
     std::shared_ptr<Cell> targetCell = nullptr;
     std::shared_ptr<Figure> figureToMove = nullptr;
     std::shared_ptr<Cell> cellWithFigureToMove = nullptr;
