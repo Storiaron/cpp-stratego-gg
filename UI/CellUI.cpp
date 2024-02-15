@@ -6,9 +6,13 @@
 
 void CellUI::print(SDL_Renderer *renderer) {
 
-    if(cell->isClicked){
+    if(cell->isSelected){
        selectedCellUi.print(renderer);
-    } else {
+    } else if (cell->isHovered)
+    {
+        hoveredUi.print(renderer);
+    }
+    else {
         SDL_QueryTexture(texture, nullptr, nullptr, &cellRect.w, &cellRect.h);
 
         SDL_RenderCopy(renderer, texture, nullptr, &cellRect);
