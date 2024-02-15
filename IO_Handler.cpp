@@ -3,6 +3,9 @@
 //
 
 #include "IO_Handler.h"
+#include "Figures/Soldiers/Peasant.h"
+#include "Figures/Soldiers/Artificer.h"
+#include "Figures/Soldiers/Marauder.h"
 
 void IO_Handler::initSDL() {
 
@@ -26,7 +29,7 @@ void IO_Handler::initSDL() {
 }
 
 
-void IO_Handler::initLogic() {
+void IO_Handler::initCells() {
     for(int i = 0; i < numberOfCells; i++){
         cells.push_back(std::make_shared<Cell>(i));
     }
@@ -60,6 +63,7 @@ void IO_Handler::run() {
 
     while(isRunning){
         handleEvent();
+        togglePanels();
         display();
         SDL_Delay(25);
     }
@@ -83,6 +87,7 @@ void IO_Handler::handleEvent() {
 void IO_Handler::handleClick(const SDL_MouseButtonEvent &click) {
     SDL_Point point{click.x, click.y};
     int index = 0;
+
     for (auto &cell : boardCellsUI) {
         if (SDL_PointInRect(&point, &cell->cellRect) == SDL_TRUE){
             if(currentCellIndex >= 0){
@@ -90,6 +95,11 @@ void IO_Handler::handleClick(const SDL_MouseButtonEvent &click) {
             }
             currentCellIndex = index;
             cells[currentCellIndex]->isClicked = true;
+
+            //Set shop's selected figure to test whether we can place a figure on board or not
+            shopPanel->setSelectedFigure(std::make_shared<Artificer>(Artificer(PlayerColor::NO_COLOR)));
+
+            decideClickHandlePhase();
             break;
         }
         index++;
@@ -104,6 +114,29 @@ void IO_Handler::handleClick(const SDL_MouseButtonEvent &click) {
     }
 }
 
+void IO_Handler::decideClickHandlePhase() {
+    if (gameLogic->getRedPlayer()->getIsReady() && gameLogic->getBluePlayer()->getIsReady()) {
+        handleClickInGamePhase();
+    } else {
+        handleClickInBuyPhase();
+    }
+}
+
+void IO_Handler::handleClickInBuyPhase() {
+    if (shopPanel->getSelectedFigure() != nullptr) {
+        gameLogic->setTargetCell(cells[currentCellIndex]);
+        shopPanel->buyFigure();
+    }
+}
+
+void IO_Handler::handleClickInGamePhase() {
+    if (gameLogic->getCurrentlySelectedFigure()) {
+        gameLogic->setTargetCell(cells[currentCellIndex]);
+        gameLogic->moveOrAttack();
+    } else {
+        gameLogic->setFigureToMove(cells[currentCellIndex]);
+    }
+}
 
 
 void IO_Handler::handleHover(SDL_MouseMotionEvent motion) {
@@ -115,7 +148,14 @@ void IO_Handler::handleHover(SDL_MouseMotionEvent motion) {
     for (std::shared_ptr<CellUI> &cell : boardCellsUI) {
         if((cell->cellRect.x < mouseX) && (cell->cellRect.w + cell->cellRect.x > mouseX) &&
                 (cell->cellRect.y < mouseY) && (cell->cellRect.h + cell->cellRect.y > mouseY)){
-            std::cout << std::to_string(index) << std::endl;
+            //std::cout << std::to_string(index) << std::endl;
+            if (cells[index]->getFigureOnCell() != nullptr) {
+                infoPanel->setCurrentFigureInfo(cells[index]->getFigureOnCell());
+
+                //Write the figure's name in the console
+                std::cout << infoPanel->getCurrentFigureInfo()->name << std::endl;
+                std::cout << infoPanel->getCurrentFigureInfo()->currentHp << std::endl;
+            }
             break;
         }
         index++;
@@ -143,6 +183,27 @@ void IO_Handler::display() {
     }
 
     SDL_RenderPresent(renderer);
+}
+
+void IO_Handler::initLogic() {
+    gameLogic = std::make_shared<GameLogic>(GameLogic());
+    infoPanel = std::make_shared<InfoPanel>(InfoPanel(gameLogic));
+    shopPanel = std::make_shared<ShopPanel>(ShopPanel(gameLogic));
+    currentPanel = shopPanel;
+
+    //add figures and set players' readiness to true for testing
+    cells[0]->addFigureToCell(std::make_shared<Peasant>(Peasant(RED)));
+    cells[1]->addFigureToCell(std::make_shared<Marauder>(Marauder(BLUE)));
+    gameLogic->getBluePlayer()->setReady();
+    gameLogic->getRedPlayer()->setReady();
+}
+
+void IO_Handler::togglePanels() {
+    if (gameLogic->getBluePlayer()->getIsReady() && gameLogic->getRedPlayer()->getIsReady()) {
+        currentPanel = infoPanel;
+    } else {
+        currentPanel = shopPanel;
+    }
 }
 
 

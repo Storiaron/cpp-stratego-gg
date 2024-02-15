@@ -11,14 +11,20 @@
 #include "Logic/Cell.h"
 #include "UI/PanelLayerUI.h"
 #include "UI/ButtonUI.h"
+#include "Logic/GameLogic.h"
+#include "Logic/InfoPanel.h"
+#include "Logic/ShopPanel.h"
+#include "Figures/Soldiers/Marauder.h"
+#include "Figures/Soldiers/Peasant.h"
 
 
 class IO_Handler {
 public:
     IO_Handler(){
         initSDL();
-        initLogic();
+        initCells();
         initUI();
+        initLogic();
     }
 
     ~IO_Handler(){
@@ -32,6 +38,11 @@ private:
     SDL_Window* window{nullptr};
     SDL_Renderer* renderer{nullptr};
     SDL_Event event{};
+
+    std::shared_ptr<GameLogic> gameLogic;
+    std::shared_ptr<InfoPanel> infoPanel;
+    std::shared_ptr<ShopPanel> shopPanel;
+    std::shared_ptr<InfoPanel> currentPanel;
 
     const static int layerWidth{250};
     const static int boardWidth{1010};
@@ -49,11 +60,18 @@ private:
     int numberOfCells = 100;
 
     void initSDL();
+    void initCells();
     void initLogic();
     void initUI();
     void display();
     void handleEvent();
     void handleClick(const SDL_MouseButtonEvent &click);
     void handleHover(SDL_MouseMotionEvent motion);
+    void togglePanels();
 
+    void handleClickInGamePhase();
+
+    void handleClickInBuyPhase();
+
+    void decideClickHandlePhase();
 };

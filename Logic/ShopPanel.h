@@ -13,9 +13,15 @@ public:
         initializeBuyableFigures();
     };
     void buyFigure();
+    std::shared_ptr<Figure> getSelectedFigure();
+    void setSelectedFigure(std::shared_ptr<Figure> figure);
 
 private:
     void initializeBuyableFigures();
     std::shared_ptr<Figure> selectedFigure;
     std::shared_ptr<Figure> buyableFigures{new Figure[13]};
+
+    void AddFigureToPlayerInventoryAndPlaceOnCell(std::shared_ptr<Player> &currentPlayer, const Figure &figure);
+
+    void createFigureForPlayer(std::shared_ptr<Player> &currentPlayer, const PlayerColor &currentPlayerColor);
 };
