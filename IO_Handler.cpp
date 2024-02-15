@@ -124,7 +124,7 @@ void IO_Handler::handleClickInGamePhase() {
         gameLogic->moveOrAttack();
     } else {
         if (cells[currentCellIndex]->getFigureOnCell() != nullptr &&
-            gameLogic->getCurrentPlayer()->getColor() == cells[currentCellIndex]->getFigureOnCell()->getColor() &&
+            gameLogic->getCurrentPlayer()->getColor() == cells[currentCellIndex]->getFigureOnCell()->getPlayerColor() &&
             cells[currentCellIndex]->getFigureOnCell()->getMovement() > 0) {
             gameLogic->setFigureToMove(cells[currentCellIndex]);
         }
