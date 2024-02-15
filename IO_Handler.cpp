@@ -121,7 +121,7 @@ void IO_Handler::handleClickInBuyPhase() {
 void IO_Handler::handleClickInGamePhase() {
     if (gameLogic->getCurrentlySelectedFigure()) {
         gameLogic->setTargetCell(cells[currentCellIndex]);
-        gameLogic->moveOrAttack();
+        gameLogic->handleAction();
     } else {
         if (cells[currentCellIndex]->getFigureOnCell() != nullptr &&
             gameLogic->getCurrentPlayer()->getColor() == cells[currentCellIndex]->getFigureOnCell()->getPlayerColor() &&
