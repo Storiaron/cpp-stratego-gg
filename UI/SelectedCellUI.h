@@ -4,8 +4,8 @@
 
 class SelectedCellUI : public TextureCreator {
 public:
-    SelectedCellUI(SDL_Renderer* renderer, int width, int height, int x, int y) :
-    TextureCreator(renderer, width, height, SDL_Color{0,0,255,255})
+    SelectedCellUI(SDL_Renderer* renderer, int width, int height, int x, int y, SDL_Color color) :
+    TextureCreator(renderer, width, height, color)
     {
         selectedCellRect.x = x;
         selectedCellRect.y = y;
