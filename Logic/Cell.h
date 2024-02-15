@@ -15,6 +15,8 @@ public:
     bool isSelected{false};
     bool isHovered{false};
 
+    bool operator== (const Cell& other) { return other.cellIndex == cellIndex;}
+    int getCellIndex() { return cellIndex;}
     void removeFigureFromCell();
     void addFigureToCell(std::shared_ptr<Figure> figure);
     std::shared_ptr<Figure> getFigureOnCell();

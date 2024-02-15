@@ -5,6 +5,7 @@
 #include "Figure.h"
 
 #include <utility>
+#include <iostream>
 
 Figure::Figure(FigureName name, int currentHp, int damage, int movement, int minAttackRange, int maxAttackRange,
                int price, std::vector<AttackType> attackTypes, AttackType resistance, PlayerColor color) {
@@ -27,15 +28,7 @@ void Figure::attack(const std::shared_ptr<Figure>& target) {
 }
 
 void Figure::defend(const std::shared_ptr<Figure>& attacker) {
-    bool canBeBlocked = false;
-
-    for (AttackType attackType : attacker->getAttackTypes()) {
-        if (attackType == resistance) {
-            canBeBlocked = true;
-        }
-    }
-
-    if (!canBeBlocked) {
+    if (!isResistant(attacker)) {
         this->currentHp += attacker->getDamage();
         if (currentHp <= 0) {
             isDead = true;
@@ -105,3 +98,13 @@ bool Figure::getIsDead() {
     return isDead;
 }
 
+bool Figure::isResistant(const std::shared_ptr<Figure>& attacker) {
+    bool isResistant = false;
+
+    for (AttackType attackType : attacker->getAttackTypes()) {
+        if (attackType == resistance) {
+            isResistant = true;
+        }
+    }
+    return isResistant;
+}

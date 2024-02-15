@@ -6,7 +6,7 @@
 
 #include <utility>
 #include <iostream>
-
+#include "WinningPlayer.h"
 GameLogic::~GameLogic() {
 }
 
@@ -14,14 +14,17 @@ GameLogic::GameLogic() {
     redPlayer = std::make_shared<Player>(Player(PlayerColor::RED));
     bluePlayer = std::make_shared<Player>(Player(PlayerColor::BLUE));
     currentPlayer = redPlayer;
+    otherPlayer = bluePlayer;
     initializeBoard();
 }
 
 void GameLogic::toggleCurrentPlayer() {
     if (currentPlayer->getColor() == PlayerColor::BLUE) {
         currentPlayer = redPlayer;
+        otherPlayer = bluePlayer;
     } else {
         currentPlayer = bluePlayer;
+        otherPlayer = redPlayer;
     }
 }
 
@@ -64,19 +67,44 @@ void GameLogic::initializeBoard() {
 //    }
 }
 
-void GameLogic::moveOrAttack() {
-    if (figureToMove->getMovement() > 0 && targetCell->getFigureOnCell() == nullptr) {
-        cellWithFigureToMove->removeFigureFromCell();
-        targetCell->addFigureToCell(figureToMove);
-    } else if (targetCell->getFigureOnCell() != nullptr) {
-        figureToMove->attack(targetCell->getFigureOnCell());
-        if (targetCell->getFigureOnCell()->getIsDead()) {
-            targetCell->removeFigureFromCell();
-        }
-    }
+std::string GameLogic::handleAction() {
+  int distance = calculateCellDistance();
+  if(!figureToMove->isWithinMovementRange(distance) && !figureToMove->isWithinAtkRange(distance))return "TBD";
+  if(cellWithFigureToMove == targetCell)return "TBD";
+  if(targetCell->getFigureOnCell() == nullptr && figureToMove->isWithinMovementRange(distance)) move();
+  else if(targetCell->getFigureOnCell() != nullptr && figureToMove->isWithinAtkRange(distance)) attack();
     isAFigureCurrentlySelected = false;
+    toggleCurrentPlayer();
+    return winMessages[checkIfAPlayerHasWon()];
 }
-
+int GameLogic::calculateCellDistance() {
+  int distance;
+  distance = std::abs(targetCell->getCellIndex() - cellWithFigureToMove->getCellIndex());
+  if(distance >= 10) {
+    if(std::abs((double)distance / 10 - std::round((double)distance / 10)) < std::numeric_limits<double>::epsilon()) {
+      distance = distance / 10;
+    }
+    else {
+      distance = 1000;
+    }
+  }
+  return distance;
+}
+void GameLogic::move() {
+  std::cout << "move called" << std::endl;
+  targetCell->addFigureToCell(figureToMove);
+  cellWithFigureToMove->removeFigureFromCell();
+}
+void GameLogic::attack() {
+  std::cout << "attack called" << std::endl;
+  figureToMove->attack(targetCell->getFigureOnCell());
+  if (targetCell->getFigureOnCell()->getIsDead()) {
+    targetCell->removeFigureFromCell();
+  }
+  if(figureToMove->getIsDead()) {
+    cellWithFigureToMove->removeFigureFromCell();
+  }
+}
 std::shared_ptr<Cell> GameLogic::getSelectedCell() {
     return targetCell;
 }
@@ -93,3 +121,11 @@ std::shared_ptr<Player> GameLogic::getBluePlayer() {
     return bluePlayer;
 }
 
+int GameLogic::checkIfAPlayerHasWon() {
+    if (redPlayer->isKingDefeatedOrLastFigure()) {
+        return redPlayerWin;
+    } else if (bluePlayer->isKingDefeatedOrLastFigure()) {
+        return bluePlayerWin;
+    }
+    return noPlayerWin;
+}

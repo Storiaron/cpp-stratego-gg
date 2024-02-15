@@ -2,7 +2,7 @@
 #include "PanelUI.h"
 
 void PanelUI::loadStats(SDL_Renderer *renderer, const std::shared_ptr<InfoPanel>& infoPanel) {
-    int size = 50;
+    int size = 40;
     SDL_Color color = {0,0,0,255};
     if (infoPanel->getCurrentFigureInfo() != nullptr) {
         std::string figureName = infoPanel->getCurrentFigureInfo()->name;

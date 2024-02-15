@@ -12,14 +12,21 @@ public:
     Player(PlayerColor color);
     void spendGold(int amount);
     bool canGoldBeSpent(int amount) const;
-    void addFigure(const Figure& figure);
+    void addFigure(std::shared_ptr<Figure> figure);
+    void removeFigure(const std::shared_ptr<Figure>& figure);
+    std::vector<std::shared_ptr<Figure>> getFigures();
+    bool isKingDefeatedOrLastFigure();
     void setReady();
     bool getIsReady();
     PlayerColor getColor();
 
 private:
-    std::vector<Figure> figures;
+    std::vector<std::shared_ptr<Figure>> figures;
     PlayerColor color;
     bool isReady{false};
     int gold = 350;
+
+    bool checkIfKingIsDefeated();
+
+    bool checkIfKingAndWallsRemainOnly();
 };

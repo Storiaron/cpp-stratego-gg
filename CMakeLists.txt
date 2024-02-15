@@ -35,6 +35,12 @@ add_executable(cpp_stratego_gg main.cpp
         UI/CellUI.h
         UI/SelectedCellUI.cpp
         UI/SelectedCellUI.h
+        Figures/Soldiers/Paladin.cpp
+        Figures/Soldiers/Vampire.cpp
+        Figures/Soldiers/Knight.cpp
+        Logic/WinningPlayer.h
+        Logic/WinningPlayer.h
+        UI/SelectedCellUI.h
         UI/PanelLayerUI.cpp
         UI/PanelLayerUI.h
         UI/ButtonUI.cpp

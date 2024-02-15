@@ -3,3 +3,9 @@
 //
 
 #include "Vampire.h"
+void Vampire::attack(const std::shared_ptr<Figure> &target) {
+  if (target->isResistant(shared_from_this())) {
+    currentHp -= damage;
+  }
+  target->defend(shared_from_this());
+}
