@@ -91,10 +91,10 @@ void IO_Handler::handleClick(const SDL_MouseButtonEvent &click) {
     for (auto &cell : boardCellsUI) {
         if (SDL_PointInRect(&point, &cell->cellRect) == SDL_TRUE){
             if(currentCellIndex >= 0){
-                cells[currentCellIndex]->isClicked = false;
+                cells[currentCellIndex]->isSelected = false;
             }
             currentCellIndex = index;
-            cells[currentCellIndex]->isClicked = true;
+            cells[currentCellIndex]->isSelected = true;
 
             //Set shop's selected figure to test whether we can place a figure on board or not
             shopPanel->setSelectedFigure(std::make_shared<Artificer>(Artificer(PlayerColor::NO_COLOR)));
@@ -148,7 +148,7 @@ void IO_Handler::handleHover(SDL_MouseMotionEvent motion) {
     for (std::shared_ptr<CellUI> &cell : boardCellsUI) {
         if((cell->cellRect.x < mouseX) && (cell->cellRect.w + cell->cellRect.x > mouseX) &&
                 (cell->cellRect.y < mouseY) && (cell->cellRect.h + cell->cellRect.y > mouseY)){
-            //std::cout << std::to_string(index) << std::endl;
+            cells[index]->isHovered = true;
             if (cells[index]->getFigureOnCell() != nullptr) {
                 infoPanel->setCurrentFigureInfo(cells[index]->getFigureOnCell());
 
@@ -156,7 +156,10 @@ void IO_Handler::handleHover(SDL_MouseMotionEvent motion) {
                 std::cout << infoPanel->getCurrentFigureInfo()->name << std::endl;
                 std::cout << infoPanel->getCurrentFigureInfo()->currentHp << std::endl;
             }
-            break;
+        } else {
+            if(cells[index]->isHovered){
+                cells[index]->isHovered = false;
+            }
         }
         index++;
     }
