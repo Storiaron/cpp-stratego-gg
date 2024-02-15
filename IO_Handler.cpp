@@ -132,7 +132,10 @@ void IO_Handler::handleClickInBuyPhase() {
 void IO_Handler::handleClickInGamePhase() {
     if (gameLogic->getCurrentlySelectedFigure()) {
         gameLogic->setTargetCell(cells[currentCellIndex]);
-        gameLogic->handleAction();
+        std::string actionResult = gameLogic->handleAction();
+        if(actionResult != "TBD") {
+          std::cout << actionResult;
+        }
     } else {
         if (cells[currentCellIndex]->getFigureOnCell() != nullptr &&
             gameLogic->getCurrentPlayer()->getColor() == cells[currentCellIndex]->getFigureOnCell()->getPlayerColor() &&

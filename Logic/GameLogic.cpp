@@ -6,7 +6,7 @@
 
 #include <utility>
 #include <iostream>
-
+#include "WinningPlayer.h"
 GameLogic::~GameLogic() {
 }
 
@@ -67,14 +67,15 @@ void GameLogic::initializeBoard() {
 //    }
 }
 
-void GameLogic::handleAction() {
+std::string GameLogic::handleAction() {
   int distance = calculateCellDistance();
-  if(!figureToMove->isWithinMovementRange(distance) && !figureToMove->isWithinAtkRange(distance))return;
-  if(cellWithFigureToMove == targetCell)return;
+  if(!figureToMove->isWithinMovementRange(distance) && !figureToMove->isWithinAtkRange(distance))return "TBD";
+  if(cellWithFigureToMove == targetCell)return "TBD";
   if(targetCell->getFigureOnCell() == nullptr && figureToMove->isWithinMovementRange(distance)) move();
   else if(targetCell->getFigureOnCell() != nullptr && figureToMove->isWithinAtkRange(distance)) attack();
     isAFigureCurrentlySelected = false;
     toggleCurrentPlayer();
+    return winMessages[checkIfAPlayerHasWon()];
 }
 int GameLogic::calculateCellDistance() {
   int distance;
@@ -127,16 +128,4 @@ int GameLogic::checkIfAPlayerHasWon() {
         return bluePlayerWin;
     }
     return noPlayerWin;
-}
-
-std::string GameLogic::getPlayerWinMessage() {
-    std::string winMessage = "";
-    if (checkIfAPlayerHasWon() == noPlayerWin) {
-        return winMessage;
-    } else if (checkIfAPlayerHasWon() == redPlayerWin) {
-        winMessage+= GetPlayerColorText(RED);
-    } else if (checkIfAPlayerHasWon() == bluePlayerWin) {
-        winMessage+= GetPlayerColorText(BLUE);
-    }
-    return winMessage;
 }

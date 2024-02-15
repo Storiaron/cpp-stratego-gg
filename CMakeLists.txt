@@ -36,7 +36,9 @@ add_executable(cpp_stratego_gg main.cpp
         UI/SelectedCellUI.h
         Figures/Soldiers/Paladin.cpp
         Figures/Soldiers/Vampire.cpp
-        Figures/Soldiers/Knight.cpp)
+        Figures/Soldiers/Knight.cpp
+        Logic/WinningPlayer.h
+        Logic/WinningPlayer.h)
 
 target_link_libraries(cpp_stratego_gg
         PRIVATE
