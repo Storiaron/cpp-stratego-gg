@@ -16,7 +16,10 @@ public:
     std::shared_ptr<Player> getCurrentPlayer();
     bool setFigureToMove(std::shared_ptr<Cell> cell);
     void setTargetCell(std::shared_ptr<Cell> cell);
-    void moveOrAttack();
+    void handleAction();
+    void move();
+    void attack();
+    int calculateCellDistance();
     bool getCurrentlySelectedFigure();
     std::shared_ptr<Player> getRedPlayer();
     std::shared_ptr<Player> getBluePlayer();

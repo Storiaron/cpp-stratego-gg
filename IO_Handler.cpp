@@ -6,6 +6,7 @@
 #include "Figures/Soldiers/Peasant.h"
 #include "Figures/Soldiers/Artificer.h"
 #include "Figures/Soldiers/Marauder.h"
+#include "Figures/Soldiers/Cavalier.h"
 #include "Figures/Soldiers/Archer.h"
 #include "Figures/Soldiers/Paladin.h"
 #include "Figures/Soldiers/Wall.h"
@@ -131,7 +132,7 @@ void IO_Handler::handleClickInBuyPhase() {
 void IO_Handler::handleClickInGamePhase() {
     if (gameLogic->getCurrentlySelectedFigure()) {
         gameLogic->setTargetCell(cells[currentCellIndex]);
-        gameLogic->moveOrAttack();
+        gameLogic->handleAction();
     } else {
         if (cells[currentCellIndex]->getFigureOnCell() != nullptr &&
             gameLogic->getCurrentPlayer()->getColor() == cells[currentCellIndex]->getFigureOnCell()->getPlayerColor() &&
@@ -184,8 +185,7 @@ void IO_Handler::initLogic() {
     shopPanel = std::make_shared<ShopPanel>(ShopPanel(gameLogic));
     currentPanel = shopPanel;
 
-    initFigures();
-    //set players' readiness to skip shop phase
+    //add figures and set players' readiness to true for testing
     gameLogic->getBluePlayer()->setReady();
     gameLogic->getRedPlayer()->setReady();
 }

@@ -11,9 +11,9 @@ public:
     Cell(int index) :
     cellIndex(index)
     {};
-
+    bool operator== (const Cell& other) { return other.cellIndex == cellIndex;}
     bool isClicked{false};
-
+    int getCellIndex() { return cellIndex;}
     void removeFigureFromCell();
     void addFigureToCell(std::shared_ptr<Figure> figure);
     std::shared_ptr<Figure> getFigureOnCell();

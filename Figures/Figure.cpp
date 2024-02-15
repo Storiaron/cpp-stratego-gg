@@ -5,6 +5,7 @@
 #include "Figure.h"
 
 #include <utility>
+#include <iostream>
 
 Figure::Figure(FigureName name, int currentHp, int damage, int movement, int minAttackRange, int maxAttackRange,
                int price, std::vector<AttackType> attackTypes, AttackType resistance, PlayerColor color) {
