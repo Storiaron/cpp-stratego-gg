@@ -61,12 +61,26 @@ void IO_Handler::initUI() {
     for(int i = 0; i < numberOfCells; i++){
         boardCellsUI.push_back(std::make_shared<CellUI>(renderer,cells[i], cellWidth, cellHeight, x, y));
 
+
+        if(cells[i]->getFigureOnCell()){
+            if(cells[i]->getFigureOnCell()->getPlayerColor() == PlayerColor::BLUE){
+                std::shared_ptr<BluePlayerTexture> figure = std::make_shared<BluePlayerTexture>(renderer, x,y);
+                bluePlayerFigures.push_back(figure);
+            }
+
+            if(cells[i]->getFigureOnCell()->getPlayerColor() == PlayerColor::RED){
+                std::shared_ptr<RedPlayerTexture> figure = std::make_shared<RedPlayerTexture>(renderer, x,y);
+                redPlayerFigures.push_back(figure);
+            }
+        }
+
         if( x + cellWidth + cellBorderSize >= boardWidth + layerWidth){
             y = y + cellHeight + cellBorderSize;
             x = cellBorderSize + layerWidth;
         } else {
             x = x + cellWidth + cellBorderSize;
         }
+
     }
 }
 
@@ -142,17 +156,40 @@ void IO_Handler::handleClickInGamePhase() {
         gameLogic->setTargetCell(cells[currentCellIndex]);
         std::string actionResult = gameLogic->handleAction();
         if(actionResult != "TBD") {
-          std::cout << actionResult;
+          //std::cout << actionResult;
         }
     } else {
         if (cells[currentCellIndex]->getFigureOnCell() != nullptr &&
             gameLogic->getCurrentPlayer()->getColor() == cells[currentCellIndex]->getFigureOnCell()->getPlayerColor() &&
             cells[currentCellIndex]->getFigureOnCell()->getMovement() > 0) {
             gameLogic->setFigureToMove(cells[currentCellIndex]);
+
         }
     }
-}
 
+    int redCounter = 0;
+    int blueCounter = 0;
+
+    for(int i = 0; i < cells.size(); i++){
+        if(cells[i]->getFigureOnCell()){
+            if(cells[i]->getFigureOnCell()->getPlayerColor() == PlayerColor::RED){
+                int x = boardCellsUI[i]->cellRect.x;
+                int y = boardCellsUI[i]->cellRect.y;
+
+                redPlayerFigures[redCounter]->setFigureCoordinate(x,y);
+                redCounter++;
+            }
+            if(cells[i]->getFigureOnCell()->getPlayerColor() == PlayerColor::BLUE){
+                int x = boardCellsUI[i]->cellRect.x;
+                int y = boardCellsUI[i]->cellRect.y;
+
+                bluePlayerFigures[blueCounter]->setFigureCoordinate(x,y);
+                blueCounter++;
+            }
+        }
+    }
+
+}
 
 void IO_Handler::handleHover(SDL_MouseMotionEvent motion) {
     Sint32 mouseX = motion.x;
@@ -168,9 +205,6 @@ void IO_Handler::handleHover(SDL_MouseMotionEvent motion) {
             if (cells[index]->getFigureOnCell() != nullptr) {
                 //Write the figure's name in the console
                 infoPanelUI = std::make_shared<PanelUI>(renderer, infoPanel);
-                std::cout << infoPanel->getCurrentFigureInfo()->name << std::endl;
-                std::cout << infoPanel->getCurrentFigureInfo()->currentHp << std::endl;
-                std::cout << infoPanel->getCurrentFigureInfo()->color << std::endl;
             } else {
                 infoPanelUI = nullptr;
             }
@@ -203,8 +237,16 @@ void IO_Handler::display() {
         infoPanelUI->print(renderer);
     }
 
-    for(const std::shared_ptr<CellUI>& cell : boardCellsUI){
-        cell->print(renderer);
+    for(int i = 0; i < boardCellsUI.size(); i++){
+        boardCellsUI[i]->print(renderer);
+    }
+
+    for(const std::shared_ptr<BluePlayerTexture>& blue : bluePlayerFigures){
+        blue->print(renderer);
+    }
+
+    for(const std::shared_ptr<RedPlayerTexture>& red : redPlayerFigures){
+        red->print(renderer);
     }
 
     SDL_RenderPresent(renderer);
