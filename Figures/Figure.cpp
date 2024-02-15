@@ -95,7 +95,13 @@ bool Figure::getIsDead() {
     return isDead;
 }
 
-PlayerColor Figure::getColor() {
-    return color;
-}
+bool Figure::isNotResistant(const std::shared_ptr<Figure> attacker) {
+    bool canBeBlocked = false;
 
+    for (AttackType attackType : attacker->getAttackTypes()) {
+        if (attackType == resistance) {
+            canBeBlocked = true;
+        }
+    }
+    return canBeBlocked;
+}
