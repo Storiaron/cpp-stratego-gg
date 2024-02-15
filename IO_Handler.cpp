@@ -186,6 +186,7 @@ void IO_Handler::initLogic() {
     currentPanel = shopPanel;
 
     //add figures and set players' readiness to true for testing
+    initFigures();
     gameLogic->getBluePlayer()->setReady();
     gameLogic->getRedPlayer()->setReady();
 }

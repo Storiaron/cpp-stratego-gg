@@ -72,7 +72,7 @@ void GameLogic::handleAction() {
   if(!figureToMove->isWithinMovementRange(distance) && !figureToMove->isWithinAtkRange(distance))return;
   if(cellWithFigureToMove == targetCell)return;
   if(targetCell->getFigureOnCell() == nullptr && figureToMove->isWithinMovementRange(distance)) move();
-  if(targetCell->getFigureOnCell() != nullptr && figureToMove->isWithinAtkRange(distance)) attack();
+  else if(targetCell->getFigureOnCell() != nullptr && figureToMove->isWithinAtkRange(distance)) attack();
     isAFigureCurrentlySelected = false;
     toggleCurrentPlayer();
 }
@@ -90,10 +90,12 @@ int GameLogic::calculateCellDistance() {
   return distance;
 }
 void GameLogic::move() {
+  std::cout << "move called" << std::endl;
   targetCell->addFigureToCell(figureToMove);
   cellWithFigureToMove->removeFigureFromCell();
 }
 void GameLogic::attack() {
+  std::cout << "attack called" << std::endl;
   figureToMove->attack(targetCell->getFigureOnCell());
   if (targetCell->getFigureOnCell()->getIsDead()) {
     targetCell->removeFigureFromCell();
