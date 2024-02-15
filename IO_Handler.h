@@ -10,6 +10,7 @@
 #include "UI/CellUI.h"
 #include "Logic/Cell.h"
 #include "UI/PanelLayerUI.h"
+#include "UI/ButtonUI.h"
 
 
 class IO_Handler {
@@ -42,6 +43,7 @@ private:
     std::vector<std::shared_ptr<CellUI>> boardCellsUI;
     std::shared_ptr<BoardUI> boardUI{nullptr};
     std::shared_ptr<PanelLayerUI> panelUI{nullptr};
+    std::shared_ptr<ButtonUI> shopButton{nullptr};
 
     bool isRunning{true};
     int numberOfCells = 100;

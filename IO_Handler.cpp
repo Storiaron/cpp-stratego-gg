@@ -36,6 +36,7 @@ void IO_Handler::initLogic() {
 void IO_Handler::initUI() {
     panelUI = std::make_shared<PanelLayerUI>(renderer, layerWidth, windowHeight,0,0);
     boardUI = std::make_shared<BoardUI>(renderer, boardWidth,windowHeight, layerWidth,0);
+    shopButton = std::make_shared<ButtonUI>(renderer, 200,40, layerWidth * 0.1, windowHeight * 0.85);
 
     int cellWidth = 90;
     int cellHeight = 90;
@@ -93,6 +94,14 @@ void IO_Handler::handleClick(const SDL_MouseButtonEvent &click) {
         }
         index++;
     }
+
+    if(SDL_PointInRect(&point, &shopButton->buttonRect) == SDL_TRUE){
+        shopButton->isClicked = true;
+    } else {
+        if(shopButton->isClicked){
+            shopButton->isClicked = false;
+        }
+    }
 }
 
 
@@ -111,6 +120,15 @@ void IO_Handler::handleHover(SDL_MouseMotionEvent motion) {
         }
         index++;
     }
+
+    if((shopButton->buttonRect.x < mouseX) && (shopButton->buttonRect.w + shopButton->buttonRect.x > mouseX) &&
+       (shopButton->buttonRect.y < mouseY) && (shopButton->buttonRect.h + shopButton->buttonRect.y > mouseY)){
+        shopButton->isHovered = true;
+    } else {
+        if(shopButton->isHovered){
+            shopButton->isHovered = false;
+        }
+    }
 }
 
 void IO_Handler::display() {
@@ -118,6 +136,7 @@ void IO_Handler::display() {
 
     panelUI->print(renderer);
     boardUI->print(renderer);
+    shopButton->print(renderer);
 
     for(const std::shared_ptr<CellUI>& cell : boardCellsUI){
         cell->print(renderer);
