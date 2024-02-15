@@ -96,9 +96,6 @@ void IO_Handler::handleClick(const SDL_MouseButtonEvent &click) {
             currentCellIndex = index;
             cells[currentCellIndex]->isClicked = true;
 
-            //Set shop's selected figure to test whether we can place a figure on board or not
-            shopPanel->setSelectedFigure(std::make_shared<Artificer>(Artificer(PlayerColor::NO_COLOR)));
-
             decideClickHandlePhase();
             break;
         }
@@ -126,7 +123,11 @@ void IO_Handler::handleClickInGamePhase() {
         gameLogic->setTargetCell(cells[currentCellIndex]);
         gameLogic->moveOrAttack();
     } else {
-        gameLogic->setFigureToMove(cells[currentCellIndex]);
+        if (cells[currentCellIndex]->getFigureOnCell() != nullptr &&
+            gameLogic->getCurrentPlayer()->getColor() == cells[currentCellIndex]->getFigureOnCell()->getColor() &&
+            cells[currentCellIndex]->getFigureOnCell()->getMovement() > 0) {
+            gameLogic->setFigureToMove(cells[currentCellIndex]);
+        }
     }
 }
 
