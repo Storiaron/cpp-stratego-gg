@@ -5,7 +5,7 @@
 class PanelLayerUI : public TextureCreator {
 public:
     PanelLayerUI(SDL_Renderer* renderer, int width, int height, int x, int y) :
-    TextureCreator(renderer, width, height, SDL_Color{255,0,255,255})
+    TextureCreator(renderer, width, height, SDL_Color{208, 189, 168,255})
     {
         panelRect.x = x;
         panelRect.y = y;
