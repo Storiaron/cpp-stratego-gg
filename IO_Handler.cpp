@@ -6,6 +6,16 @@
 #include "Figures/Soldiers/Peasant.h"
 #include "Figures/Soldiers/Artificer.h"
 #include "Figures/Soldiers/Marauder.h"
+#include "Figures/Soldiers/Archer.h"
+#include "Figures/Soldiers/Paladin.h"
+#include "Figures/Soldiers/Wall.h"
+#include "Figures/Soldiers/King.h"
+#include "Figures/Soldiers/BabyDragon.h"
+#include "Figures/Soldiers/Vampire.h"
+#include "Figures/Soldiers/Sorcerer.h"
+#include "Figures/Soldiers/Cleric.h"
+#include "Figures/Soldiers/Knight.h"
+#include "Figures/Soldiers/Cavalier.h"
 
 void IO_Handler::initSDL() {
 
@@ -174,11 +184,75 @@ void IO_Handler::initLogic() {
     shopPanel = std::make_shared<ShopPanel>(ShopPanel(gameLogic));
     currentPanel = shopPanel;
 
-    //add figures and set players' readiness to true for testing
-    cells[0]->addFigureToCell(std::make_shared<Peasant>(Peasant(RED)));
-    cells[1]->addFigureToCell(std::make_shared<Marauder>(Marauder(BLUE)));
+    initFigures();
+    //set players' readiness to skip shop phase
     gameLogic->getBluePlayer()->setReady();
     gameLogic->getRedPlayer()->setReady();
+}
+
+void IO_Handler::initFigures() {
+    initRedFigures();
+    initBlueFigures();
+}
+
+void IO_Handler::initBlueFigures() {
+    for (int i = 70; i < 80; i++) {
+        cells[i]->addFigureToCell(std::make_shared<Peasant>(Peasant(BLUE)));
+    }
+    cells[99]->addFigureToCell(std::make_shared<Archer>(Archer(BLUE)));
+    cells[98]->addFigureToCell(std::make_shared<Artificer>(Artificer(BLUE)));
+    cells[97]->addFigureToCell(std::make_shared<Paladin>(Paladin(BLUE)));
+    cells[96]->addFigureToCell(std::make_shared<Wall>(Wall(BLUE)));
+    cells[95]->addFigureToCell(std::make_shared<King>(King(BLUE)));
+    cells[94]->addFigureToCell(std::make_shared<Wall>(Wall(BLUE)));
+    cells[93]->addFigureToCell(std::make_shared<BabyDragon>(BabyDragon(BLUE)));
+    cells[92]->addFigureToCell(std::make_shared<Vampire>(Vampire(BLUE)));
+    cells[91]->addFigureToCell(std::make_shared<Artificer>(Artificer(BLUE)));
+    cells[90]->addFigureToCell(std::make_shared<Archer>(Archer(BLUE)));
+    cells[89]->addFigureToCell(std::make_shared<Archer>(Archer(BLUE)));
+    cells[88]->addFigureToCell(std::make_shared<Sorcerer>(Sorcerer(BLUE)));
+    cells[87]->addFigureToCell(std::make_shared<Marauder>(Marauder(BLUE)));
+    cells[86]->addFigureToCell(std::make_shared<Cleric>(Cleric(BLUE)));
+    cells[85]->addFigureToCell(std::make_shared<Wall>(Wall(BLUE)));
+    cells[84]->addFigureToCell(std::make_shared<Knight>(Knight(BLUE)));
+    cells[83]->addFigureToCell(std::make_shared<Cavalier>(Cavalier(BLUE)));
+    cells[82]->addFigureToCell(std::make_shared<Marauder>(Marauder(BLUE)));
+    cells[81]->addFigureToCell(std::make_shared<Sorcerer>(Sorcerer(BLUE)));
+    cells[80]->addFigureToCell(std::make_shared<Archer>(Archer(BLUE)));
+
+    for (int i = 70; i < 100; i++) {
+        gameLogic->getBluePlayer()->addFigure(cells[i]->getFigureOnCell());
+    }
+}
+
+void IO_Handler::initRedFigures() {
+    cells[0]->addFigureToCell(std::make_shared<Archer>(Archer(RED)));
+    cells[1]->addFigureToCell(std::make_shared<Artificer>(Artificer(RED)));
+    cells[2]->addFigureToCell(std::make_shared<Paladin>(Paladin(RED)));
+    cells[3]->addFigureToCell(std::make_shared<Wall>(Wall(RED)));
+    cells[4]->addFigureToCell(std::make_shared<King>(King(RED)));
+    cells[5]->addFigureToCell(std::make_shared<Wall>(Wall(RED)));
+    cells[6]->addFigureToCell(std::make_shared<BabyDragon>(BabyDragon(RED)));
+    cells[7]->addFigureToCell(std::make_shared<Vampire>(Vampire(RED)));
+    cells[8]->addFigureToCell(std::make_shared<Artificer>(Artificer(RED)));
+    cells[9]->addFigureToCell(std::make_shared<Archer>(Archer(RED)));
+    cells[10]->addFigureToCell(std::make_shared<Archer>(Archer(RED)));
+    cells[11]->addFigureToCell(std::make_shared<Sorcerer>(Sorcerer(RED)));
+    cells[12]->addFigureToCell(std::make_shared<Marauder>(Marauder(RED)));
+    cells[13]->addFigureToCell(std::make_shared<Cleric>(Cleric(RED)));
+    cells[14]->addFigureToCell(std::make_shared<Wall>(Wall(RED)));
+    cells[15]->addFigureToCell(std::make_shared<Knight>(Knight(RED)));
+    cells[16]->addFigureToCell(std::make_shared<Cavalier>(Cavalier(RED)));
+    cells[17]->addFigureToCell(std::make_shared<Marauder>(Marauder(RED)));
+    cells[18]->addFigureToCell(std::make_shared<Sorcerer>(Sorcerer(RED)));
+    cells[19]->addFigureToCell(std::make_shared<Archer>(Archer(RED)));
+    for (int i = 20; i < 30; i++) {
+        cells[i]->addFigureToCell(std::make_shared<Peasant>(Peasant(RED)));
+    }
+
+    for (int i = 0; i < 30; i++) {
+        gameLogic->getRedPlayer()->addFigure(cells[i]->getFigureOnCell());
+    }
 }
 
 void IO_Handler::togglePanels() {

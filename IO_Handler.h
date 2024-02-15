@@ -68,4 +68,10 @@ private:
     void handleClickInBuyPhase();
 
     void decideClickHandlePhase();
+
+    void initFigures();
+
+    void initRedFigures();
+
+    void initBlueFigures();
 };

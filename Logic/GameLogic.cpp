@@ -14,14 +14,17 @@ GameLogic::GameLogic() {
     redPlayer = std::make_shared<Player>(Player(PlayerColor::RED));
     bluePlayer = std::make_shared<Player>(Player(PlayerColor::BLUE));
     currentPlayer = redPlayer;
+    otherPlayer = bluePlayer;
     initializeBoard();
 }
 
 void GameLogic::toggleCurrentPlayer() {
     if (currentPlayer->getColor() == PlayerColor::BLUE) {
         currentPlayer = redPlayer;
+        otherPlayer = bluePlayer;
     } else {
         currentPlayer = bluePlayer;
+        otherPlayer = redPlayer;
     }
 }
 
@@ -71,6 +74,7 @@ void GameLogic::moveOrAttack() {
     } else if (targetCell->getFigureOnCell() != nullptr) {
         figureToMove->attack(targetCell->getFigureOnCell());
         if (targetCell->getFigureOnCell()->getIsDead()) {
+            otherPlayer->removeFigure(targetCell->getFigureOnCell());
             targetCell->removeFigureFromCell();
         }
     }
@@ -92,4 +96,25 @@ std::shared_ptr<Player> GameLogic::getRedPlayer() {
 
 std::shared_ptr<Player> GameLogic::getBluePlayer() {
     return bluePlayer;
+}
+
+int GameLogic::checkIfAPlayerHasWon() {
+    if (redPlayer->isKingDefeatedOrLastFigure()) {
+        return redPlayerWin;
+    } else if (bluePlayer->isKingDefeatedOrLastFigure()) {
+        return bluePlayerWin;
+    }
+    return noPlayerWin;
+}
+
+std::string GameLogic::getPlayerWinMessage() {
+    std::string winMessage = "";
+    if (checkIfAPlayerHasWon() == noPlayerWin) {
+        return winMessage;
+    } else if (checkIfAPlayerHasWon() == redPlayerWin) {
+        winMessage+= GetPlayerColorText(RED);
+    } else if (checkIfAPlayerHasWon() == bluePlayerWin) {
+        winMessage+= GetPlayerColorText(BLUE);
+    }
+    return winMessage;
 }

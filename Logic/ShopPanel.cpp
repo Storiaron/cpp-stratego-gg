@@ -136,7 +136,7 @@ void ShopPanel::createFigureForPlayer(std::shared_ptr<Player> &currentPlayer, co
 }
 
 void ShopPanel::AddFigureToPlayerInventoryAndPlaceOnCell(std::shared_ptr<Player> &currentPlayer, const Figure &figure) {
-    currentPlayer->addFigure(figure);
+    currentPlayer->addFigure(std::make_shared<Figure>(figure));
     game->getSelectedCell()->addFigureToCell(std::make_shared<Figure>(figure));
 }
 
