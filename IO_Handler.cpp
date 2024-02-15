@@ -148,6 +148,7 @@ void IO_Handler::handleHover(SDL_MouseMotionEvent motion) {
                 //Write the figure's name in the console
                 std::cout << infoPanel->getCurrentFigureInfo()->name << std::endl;
                 std::cout << infoPanel->getCurrentFigureInfo()->currentHp << std::endl;
+                std::cout << infoPanel->getCurrentFigureInfo()->color << std::endl;
             }
             break;
         }
