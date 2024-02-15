@@ -18,7 +18,7 @@ bool Player::canGoldBeSpent(int amount) const {
     return gold >= amount;
 }
 
-void Player::addFigure(const Figure& figure) {
+void Player::addFigure(std::shared_ptr<Figure> figure) {
     figures.push_back(figure);
 }
 
@@ -32,4 +32,38 @@ bool Player::getIsReady() {
 
 void Player::setReady() {
     isReady = true;
+}
+
+void Player::removeFigure(const std::shared_ptr<Figure>& figure) {
+    figures.erase(std::remove(figures.begin(), figures.end(), figure), figures.end());
+}
+
+std::vector<std::shared_ptr<Figure>> Player::getFigures() {
+    return figures;
+}
+
+bool Player::isKingDefeatedOrLastFigure() {
+    bool isKingDead = checkIfKingIsDefeated();
+    bool onlyKingAndWallsLive = checkIfKingAndWallsRemainOnly();
+    return isKingDead || onlyKingAndWallsLive;
+}
+
+bool Player::checkIfKingAndWallsRemainOnly() {
+    bool onlyKingAndWallsRemain = true;
+    for(const std::shared_ptr<Figure>& figure : figures) {
+        if (figure->getStats().name != GetFigureNameText(KING) || figure->getStats().name != GetFigureNameText(WALL)) {
+             onlyKingAndWallsRemain = false;
+        }
+    }
+    return onlyKingAndWallsRemain;
+}
+
+bool Player::checkIfKingIsDefeated() {
+    bool kingDefeated = true;
+    for(const std::shared_ptr<Figure>& figure : figures) {
+        if (figure->getStats().name == GetFigureNameText(KING)) {
+            kingDefeated = false;
+        }
+    }
+    return kingDefeated;
 }
