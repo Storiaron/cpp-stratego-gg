@@ -26,6 +26,7 @@ public:
     int getPrice() const;
     int getMovement() const;
     int getDamage() const;
+    PlayerColor getColor();
     FigureName getName() const;
     std::vector<AttackType> getAttackTypes() const;
     FigureStats getStats();

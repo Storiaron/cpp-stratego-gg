@@ -103,3 +103,7 @@ bool Figure::getIsDead() {
     return isDead;
 }
 
+PlayerColor Figure::getColor() {
+    return color;
+}
+
