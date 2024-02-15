@@ -65,7 +65,7 @@ void GameLogic::initializeBoard() {
 }
 
 void GameLogic::moveOrAttack() {
-    if (figureToMove->getMovement() > 0 && targetCell->getFigureOnCell() == nullptr) {
+    if (targetCell->getFigureOnCell() == nullptr) {
         cellWithFigureToMove->removeFigureFromCell();
         targetCell->addFigureToCell(figureToMove);
     } else if (targetCell->getFigureOnCell() != nullptr) {
@@ -75,6 +75,7 @@ void GameLogic::moveOrAttack() {
         }
     }
     isAFigureCurrentlySelected = false;
+    toggleCurrentPlayer();
 }
 
 std::shared_ptr<Cell> GameLogic::getSelectedCell() {
@@ -92,4 +93,3 @@ std::shared_ptr<Player> GameLogic::getRedPlayer() {
 std::shared_ptr<Player> GameLogic::getBluePlayer() {
     return bluePlayer;
 }
-

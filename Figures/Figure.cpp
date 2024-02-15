@@ -27,7 +27,7 @@ void Figure::attack(const std::shared_ptr<Figure>& target) {
 }
 
 void Figure::defend(const std::shared_ptr<Figure>& attacker) {
-    if (isNotResistant(attacker)) {
+    if (!isResistant(attacker)) {
         this->currentHp += attacker->getDamage();
         if (currentHp <= 0) {
             isDead = true;
@@ -95,3 +95,13 @@ bool Figure::getIsDead() {
     return isDead;
 }
 
+bool Figure::isResistant(const std::shared_ptr<Figure>& attacker) {
+    bool isResistant = false;
+
+    for (AttackType attackType : attacker->getAttackTypes()) {
+        if (attackType == resistance) {
+            isResistant = true;
+        }
+    }
+    return isResistant;
+}
