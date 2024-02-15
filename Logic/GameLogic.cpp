@@ -66,7 +66,7 @@ void GameLogic::initializeBoard() {
 
 void GameLogic::handleAction() {
   int distance = calculateCellDistance();
-  if(!figureToMove->isWithinMovementRange(distance) || !figureToMove->isWithinAtkRange(distance))return;
+  if(!figureToMove->isWithinMovementRange(distance) && !figureToMove->isWithinAtkRange(distance))return;
   if(cellWithFigureToMove == targetCell)return;
   if(targetCell->getFigureOnCell() == nullptr) move();
   else {

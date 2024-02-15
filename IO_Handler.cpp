@@ -6,6 +6,7 @@
 #include "Figures/Soldiers/Peasant.h"
 #include "Figures/Soldiers/Artificer.h"
 #include "Figures/Soldiers/Marauder.h"
+#include "Figures/Soldiers/Cavalier.h"
 
 void IO_Handler::initSDL() {
 
@@ -175,7 +176,7 @@ void IO_Handler::initLogic() {
     currentPanel = shopPanel;
 
     //add figures and set players' readiness to true for testing
-    cells[0]->addFigureToCell(std::make_shared<Peasant>(Peasant(RED)));
+    cells[0]->addFigureToCell(std::make_shared<Cavalier>(Cavalier(RED)));
     cells[1]->addFigureToCell(std::make_shared<Marauder>(Marauder(BLUE)));
     gameLogic->getBluePlayer()->setReady();
     gameLogic->getRedPlayer()->setReady();
