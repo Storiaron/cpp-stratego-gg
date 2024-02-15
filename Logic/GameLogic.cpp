@@ -93,12 +93,3 @@ std::shared_ptr<Player> GameLogic::getRedPlayer() {
 std::shared_ptr<Player> GameLogic::getBluePlayer() {
     return bluePlayer;
 }
-
-void GameLogic::togglePlayers() {
-    if (currentPlayer == redPlayer) {
-        currentPlayer = bluePlayer;
-    } else {
-        currentPlayer = redPlayer;
-    }
-}
-

@@ -34,7 +34,7 @@ public:
     bool isWithinAtkRange(int range) const;
     bool isWithinMovementRange(int range) const;
     bool getIsDead();
-    bool isNotResistant(const std::shared_ptr<Figure> attacker);
+    bool isResistant(const std::shared_ptr<Figure>& attacker);
 protected:
     FigureStats stats;
     FigureName name{};

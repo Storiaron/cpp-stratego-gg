@@ -24,7 +24,6 @@ public:
 
 private:
     void initializeBoard();
-    void togglePlayers();
     std::shared_ptr<Cell> targetCell = nullptr;
     std::shared_ptr<Figure> figureToMove = nullptr;
     std::shared_ptr<Cell> cellWithFigureToMove = nullptr;
