@@ -18,7 +18,7 @@ bool Player::canGoldBeSpent(int amount) const {
     return gold >= amount;
 }
 
-void Player::addFigure(const Figure& figure) {
+void Player::addFigure(std::shared_ptr<Figure> figure) {
     figures.push_back(figure);
 }
 
