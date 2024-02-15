@@ -186,8 +186,6 @@ void IO_Handler::initLogic() {
     currentPanel = shopPanel;
 
     //add figures and set players' readiness to true for testing
-    cells[0]->addFigureToCell(std::make_shared<Peasant>(Peasant(RED)));
-    cells[1]->addFigureToCell(std::make_shared<Marauder>(Marauder(BLUE)));
     gameLogic->getBluePlayer()->setReady();
     gameLogic->getRedPlayer()->setReady();
 }
