@@ -25,3 +25,11 @@ void Player::addFigure(const Figure& figure) {
 PlayerColor Player::getColor() {
     return color;
 }
+
+bool Player::getIsReady() {
+    return isReady;
+}
+
+void Player::setReady() {
+    isReady = true;
+}

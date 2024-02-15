@@ -21,7 +21,7 @@ enum FigureName {
 
 static const char * FigureNameStrings[] = { "King", "Peasant", "Marauder", "Wall", "Artificer", "Archer", "Sorcerer", "Cavalier", "Knight", "Cleric", "Vampire", "Paladin", "Baby Dragon" };
 
-const char * GetFigureNameText( int enumVal )
+static const char * GetFigureNameText( int enumVal )
 {
     return FigureNameStrings[enumVal];
 }
